@@ -20,7 +20,7 @@ namespace WebStore_Study
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();            
+            services.AddMvc().AddRazorRuntimeCompilation();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,7 +36,7 @@ namespace WebStore_Study
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/greetings", async context =>{await context.Response.WriteAsync(configuration["greetings"]);});
+                //endpoints.MapGet("/greetings", async context =>{await context.Response.WriteAsync(configuration["greetings"]);});
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
