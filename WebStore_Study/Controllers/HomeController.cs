@@ -10,8 +10,8 @@ namespace WebStore_Study.Controllers
     {
         public IActionResult Index()
         {
-            return Content("aslkdjas");
-            // return View();
+            //return Content("aslkdjas");
+            return View();
         }
         public IActionResult SecondAction()
         {
