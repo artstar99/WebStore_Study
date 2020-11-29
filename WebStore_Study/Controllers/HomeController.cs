@@ -26,9 +26,15 @@ namespace WebStore_Study.Controllers
             return Content("asdasd");
         }
 
-        public IActionResult Employees()
-        {
-            return View(employees);
-        }
+        public IActionResult Employees() => View(employees);
+
+        public IActionResult Blogs() => View();
+        public IActionResult BlogSingle() => View();
+        public IActionResult Cart() => View();
+        public IActionResult Checkout() => View();
+        public IActionResult ContactUs() => View();
+        public IActionResult Login() => View();
+        public IActionResult ProductDetails() => View();
+        public IActionResult Shop() => View();
     }
 }
