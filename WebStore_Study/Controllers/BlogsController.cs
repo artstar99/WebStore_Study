@@ -12,5 +12,9 @@ namespace WebStore_Study.Controllers
         {
             return View();
         }
+        public IActionResult BlogSingle()
+        {
+            return View();
+        }
     }
 }

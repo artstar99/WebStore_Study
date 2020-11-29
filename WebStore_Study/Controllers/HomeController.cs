@@ -28,8 +28,6 @@ namespace WebStore_Study.Controllers
 
         public IActionResult Employees() => View(employees);
 
-        public IActionResult Blogs() => View();
-        public IActionResult BlogSingle() => View();
         public IActionResult Cart() => View();
         public IActionResult Checkout() => View();
         public IActionResult ContactUs() => View();

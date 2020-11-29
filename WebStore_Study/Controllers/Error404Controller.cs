@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebStore_Study.Controllers
 {
-    public class BlogSingleController : Controller
+    public class Error404Controller : Controller
     {
         public IActionResult Index()
         {
