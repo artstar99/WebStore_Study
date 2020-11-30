@@ -1,0 +1,28 @@
+﻿@model Employee
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Редактировать карточку @Model.LastName @Model.FirstName</h2>
+                <form asp-action="EndEditEmployee" method="post">
+                    <input type="hidden" name="Id" value=@Model.Id><br>
+                    <label>Имя:</label><br>
+                    <input type="text" name="FirstName" value=@Model.FirstName><br>
+                    <label>Фамилия:</label><br>
+                    <input type="text" name="LastName" value=@Model.LastName><br>
+                    <label>Отчество:</label><br>
+                    <input type="text" name="Patronymic" value=@Model.Patronymic><br>
+                    <label>Возраст:</label><br>
+                    <input type="text" name="Age" value=@Model.Age><br>
+                    <input style="margin:10px 0px" class="btn btn-info" type="submit" value="Сохранить">
+                    <input style="margin: 10px 10px" class="btn btn-default" type="reset" value="Сбросить">
+                    <a style="margin: 10px 0px" class="btn btn-danger" asp-action="DeleteEmployee" asp-route-id="@Model.Id">Удалить</a>
+                </form>
+               
+            </div>
+
+        </div>
+
+
+    </div>

@@ -1,0 +1,28 @@
+﻿@model Employee
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Добавить нового сотрудника</h2>
+            <form asp-action="EndAddEmployee" method="post">
+                <input type="hidden" name="emp.Id" value=@Model.Id><br>
+                <label>Имя:</label><br>
+                <input type="text" name="emp.FirstName" value=@Model.FirstName><br>
+                <label>Фамилия:</label><br>
+                <input type="text" name="emp.LastName" value=@Model.LastName><br>
+                <label>Отчество:</label><br>
+                <input type="text" name="emp.Patronymic" value=@Model.Patronymic><br>
+                <label>Возраст:</label><br>
+                <input type="text" name="emp.Age" value=@Model.Age><br>
+                <input style="margin:10px 0px" class="btn btn-info" type="submit" value="Сохранить">
+                <input style="margin: 10px 10px" class="btn btn-default" type="reset" value="Сбросить">
+                <a style="margin: 10px 0px" class="btn btn-danger" asp-action="Index" >Отмена</a>
+            </form>
+
+        </div>
+
+    </div>
+
+
+</div>
