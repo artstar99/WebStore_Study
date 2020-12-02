@@ -5,73 +5,112 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore_Study.Data;
 using WebStore_Study.Models;
+using WebStore_Study.Infrastructure.Interfaces;
+using WebStore_Study.ViewModels;
 
 namespace WebStore_Study.Controllers
 {
     public class EmployeeController : Controller
     {
-        private List<Employee> employees;
-        public EmployeeController()
+        IEmployeesData employeesDataService;
+        public EmployeeController(IEmployeesData employeesDataService)
         {
-            employees = TestData.Employees;
+            this.employeesDataService = employeesDataService;
         }
         public IActionResult Index()
         {
+            var employees = employeesDataService.Load();
             return View(employees);
         }
 
         public IActionResult EmployeeDetail(int id)
         {
+            var employee = employeesDataService.GetById(id);
+            if (employee == null)
+                return NotFound();
 
-            var emp = employees.FirstOrDefault(e => e.Id == id);
-            if (emp != null)
-            {
-                return View(emp);
-            }
-            else
-            {
-                return View("Error404");
-            }
+            return View(employee); // View("Error404");
         }
 
         public IActionResult DeleteEmployee(int id)
         {
-            var emp = employees.FirstOrDefault(e => e.Id == id);
-            employees.Remove(emp);
+            if (id <= 0)
+                return BadRequest();
+            var employee = employeesDataService.GetById(id);
+            if (employee == null)
+                return NotFound();
+
+            EmployeesViewModel employeesViewModel = new EmployeesViewModel
+            {
+                Id = employee.Id,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                Patronymic = employee.Patronymic,
+                Age = employee.Age,
+            };
+            return View(employeesViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult EndDeleteEmployee(int id)
+        {
+            employeesDataService.Delete(id);
             return RedirectToAction("Index");
         }
         public IActionResult EditEmployee(int id)
         {
-            var emp = employees.FirstOrDefault(e => e.Id == id);
-            return View(emp);
-        }
-        public IActionResult EndEditEmployee(string id, string firstName, string lastName, string patronymic, string age)
-        {
-            if (Int32.TryParse(id, out int result) && Int32.TryParse(age, out int ageResult))
+            if (id<0)
+                return BadRequest();
+            
+            var employee = employeesDataService.GetById(id);
+            
+            if (employee is null)
+                return NotFound();
+            
+            return View(new EmployeesViewModel 
             {
-                //TODO: Сделать нормальную валидацию
-                var emp = employees.FirstOrDefault(e => e.Id == result);
-                emp.FirstName = firstName;
-                emp.LastName = lastName;
-                emp.Patronymic = patronymic;
-                emp.Age = ageResult;
-                return RedirectToAction("Index");
-            }
-            return RedirectToAction("Error404");
-
+                Id=employee.Id,
+                FirstName=employee.FirstName,
+                LastName=employee.LastName,
+                Patronymic=employee.Patronymic,
+                Age=employee.Age,
+            
+            });
         }
+        public IActionResult EndEditEmployee(EmployeesViewModel employeesViewModel)
+        {
+            if (employeesViewModel is null)
+                throw new ArgumentNullException(nameof(employeesViewModel));
+
+            Employee employee = new()
+            {
+                Id = employeesViewModel.Id,
+                FirstName = employeesViewModel.FirstName,
+                LastName = employeesViewModel.LastName,
+                Patronymic = employeesViewModel.Patronymic,
+                Age = employeesViewModel.Age,
+            };
+            employeesDataService.Update(employee);
+            return RedirectToAction("Index");
+        }
+        
         public IActionResult AddEmployee()
         {
-            var emp = new Employee();
-            emp.Id = employees.Max(e => e.Id)+1;
-            return View(emp);
+            return View(new EmployeesViewModel() { Id=0});
         }
-        public IActionResult EndAddEmployee(Employee emp)
+        public IActionResult EndAddEmployee(EmployeesViewModel employeesViewModel)
         {
-            employees.Add(emp);
+            Employee employee = new() 
+            {
+                FirstName = employeesViewModel.FirstName,
+                LastName = employeesViewModel.LastName,
+                Patronymic = employeesViewModel.Patronymic,
+                Age = employeesViewModel.Age,
+            };
+
+            employeesDataService.Add(employee);
 
             return RedirectToAction("Index");
-
         }
 
     }
