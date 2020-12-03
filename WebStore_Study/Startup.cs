@@ -32,6 +32,7 @@ namespace WebStore_Study
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
             }
 
             app.UseStaticFiles();

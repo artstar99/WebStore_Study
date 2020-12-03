@@ -22,7 +22,6 @@ namespace WebStore_Study.Controllers
             var employees = employeesDataService.Load();
             return View(employees);
         }
-
         public IActionResult EmployeeDetail(int id)
         {
             var employee = employeesDataService.GetById(id);
@@ -57,24 +56,25 @@ namespace WebStore_Study.Controllers
             employeesDataService.Delete(id);
             return RedirectToAction("Index");
         }
+
         public IActionResult EditEmployee(int id)
         {
-            if (id<0)
+            if (id < 0)
                 return BadRequest();
-            
+
             var employee = employeesDataService.GetById(id);
-            
+
             if (employee is null)
                 return NotFound();
-            
-            return View(new EmployeesViewModel 
+
+            return View(new EmployeesViewModel
             {
-                Id=employee.Id,
-                FirstName=employee.FirstName,
-                LastName=employee.LastName,
-                Patronymic=employee.Patronymic,
-                Age=employee.Age,
-            
+                Id = employee.Id,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                Patronymic = employee.Patronymic,
+                Age = employee.Age,
+
             });
         }
         public IActionResult EndEditEmployee(EmployeesViewModel employeesViewModel)
@@ -93,14 +93,14 @@ namespace WebStore_Study.Controllers
             employeesDataService.Update(employee);
             return RedirectToAction("Index");
         }
-        
+
         public IActionResult AddEmployee()
         {
-            return View(new EmployeesViewModel() { Id=0});
+            return View(new EmployeesViewModel() { Id = 0 });
         }
         public IActionResult EndAddEmployee(EmployeesViewModel employeesViewModel)
         {
-            Employee employee = new() 
+            Employee employee = new()
             {
                 FirstName = employeesViewModel.FirstName,
                 LastName = employeesViewModel.LastName,
