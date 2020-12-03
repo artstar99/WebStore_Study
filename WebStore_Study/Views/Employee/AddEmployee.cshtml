@@ -7,36 +7,34 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <h2>Добавить нового сотрудника</h2>
-            <form asp-action="EndAddEmployee" method="post">
+            <form asp-action="EndAddEmployee">
                 
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                
-                <input type="hidden" name="employeesViewModel.Id" value=@Model.Id><br>
+                <div asp-validation-summary="ModelOnly" ></div>
                 
                 <div class="form-group">
-                    <label>Имя:</label><br>
-                    <input type="text" name="employeesViewModel.FirstName" value=@Model.FirstName><br>
-                    <span asp-validation-for="FirstName"></span>
+                    <label asp-for="FirstName">Имя:</label><br>
+                    <input type="text" asp-for="FirstName"  class="form-control">
+                    <span asp-validation-for="FirstName" class="text-danger"> </span>
                 </div>
 
                 <div class="form-group">
-                    <label>Фамилия:</label><br>
-                    <input type="text" name="employeesViewModel.LastName" value=@Model.LastName><br>
-                    <span asp-validation-for="LastName"></span>
+                    <label asp-for="LastName">Фамилия:</label><br>
+                    <input type="text" asp-for="LastName"  class="form-control">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 
                 <div class="form-group">
-                    <label>Отчество:</label><br>
-                    <input type="text" name="employeesViewModel.Patronymic" value=@Model.Patronymic><br>
-                    <span asp-validation-for="Patronymic"></span>
+                    <label asp-for="Patronymic">Отчество:</label><br>
+                    <input type="text" asp-for="Patronymic"   class="form-control">
+                    <span asp-validation-for="Patronymic" class="text-danger"></span>
                 </div>
                 
                 <div class="form-group">
-                    <label>Возраст:</label><br>
-                    <input type="text" name="employeesViewModel.Age" value=@Model.Age><br>
-                    <span asp-validation-for="Age"></span>
+                    <label asp-for="Age">Возраст:</label><br>
+                    <input asp-for="Age" type="number"  class="form-control"><br />
+                    <span asp-validation-for="Age" class="text-danger"></span>
                 </div>
                 
                 <div class="form-group">

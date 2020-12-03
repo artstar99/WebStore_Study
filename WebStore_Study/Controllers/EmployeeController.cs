@@ -79,6 +79,11 @@ namespace WebStore_Study.Controllers
         }
         public IActionResult EndEditEmployee(EmployeesViewModel employeesViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("EditEmployee", employeesViewModel.Id);
+            }
+            
             if (employeesViewModel is null)
                 throw new ArgumentNullException(nameof(employeesViewModel));
 
@@ -98,8 +103,13 @@ namespace WebStore_Study.Controllers
         {
             return View(new EmployeesViewModel() { Id = 0 });
         }
+        [HttpPost]
         public IActionResult EndAddEmployee(EmployeesViewModel employeesViewModel)
         {
+            if (!ModelState.IsValid)
+                return View("AddEmployee", employeesViewModel);
+
+
             Employee employee = new()
             {
                 FirstName = employeesViewModel.FirstName,
@@ -111,6 +121,9 @@ namespace WebStore_Study.Controllers
             employeesDataService.Add(employee);
 
             return RedirectToAction("Index");
+
+
+
         }
 
     }

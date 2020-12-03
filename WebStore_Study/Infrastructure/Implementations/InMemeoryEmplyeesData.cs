@@ -43,11 +43,12 @@ namespace WebStore_Study.Infrastructure.Implementations
             if (item == null)
                 return 0;
 
-            item = employee;
-            //item.FirstName = employee.FirstName;
-            //item.LastName = employee.LastName;
-            //item.Patronymic = employee.Patronymic;
-            //item.Age = employee.Age;
+
+            
+            item.FirstName = employee.FirstName;
+            item.LastName = employee.LastName;
+            item.Patronymic = employee.Patronymic;
+            item.Age = employee.Age;
             return item.Id;
         }
 
