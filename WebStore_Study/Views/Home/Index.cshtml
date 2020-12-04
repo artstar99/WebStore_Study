@@ -1,16 +1,25 @@
-﻿
-<!DOCTYPE html>
+﻿@{
+    Layout = "_Layout";
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
+<partial name="Partial/_Slider" />
+<section>
+    <div class="container">
+        <div class="row">
 
-    <p> Первая вьюшка</p>
-    
-    <a href="~/Home/Employees"><p>Сотрудники</p></a>
-    
-</body>
-</html>
+            <div class="col-sm-3">
+                <partial name="../Shared/Partial/_LeftSideBar" />
+            </div>
+
+            <div class="col-sm-9 padding-right">
+
+                <partial name="Partial/_FeaturesItems" />
+
+                <partial name="Partial/_CategoryTab" />
+
+                <partial name="../Shared/Partial/_RecomendedItems" />
+
+            </div>
+        </div>
+    </div>
+</section>

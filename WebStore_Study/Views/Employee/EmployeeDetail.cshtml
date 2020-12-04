@@ -1,0 +1,33 @@
+﻿@model Employee
+
+<div class="container">
+
+    <h3>Сотрудник @Model.LastName @Model.FirstName</h3>
+    <dl class="dl-horizontal">
+        <dt> Id</dt>
+        <dd>@Model.Id</dd>
+
+        <dt>Имя</dt>
+        <dd>@Model.FirstName</dd>
+
+        <dt>Фамилия</dt>
+        <dd>@Model.LastName</dd>
+
+        <dt>Отчество</dt>
+        <dd>@Model.Patronymic</dd>
+
+        <dt>Возраст</dt>
+        <dd>@Model.Age</dd>
+
+    </dl>
+
+    <hr />
+    <div class="row">
+        <div class="col-sm-5">
+            <a asp-action="Index" class="btn btn-default">К списку</a>
+        </div>
+
+    </div>
+
+
+</div>
