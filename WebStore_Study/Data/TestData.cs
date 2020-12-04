@@ -13,45 +13,44 @@ namespace WebStore_Study.Data
             new Blog
             {
                 Id=1,
-                Heading="GIRLS PINK T SHIRT ARRIVED IN STORE",
+                Heading="GIRLS PINK T SHIRT ARRIVED IN STORE-1",
                 Author="Mac Doe",
                 MainText=loremText,
                 CreationTime= new DateTime(2013, 12, 5, 13, 33, 0),
                 Tags=new List<string>(){"Pink", "T-Shirt", "Girls"},
-                Image=new BlogFile()
-                { Id =1, Name=$"Blogimage-1", Path="~/images/blog/blog-one.jpg"  }
+                Image=new BlogFile() { Id =1, Name=$"Blogimage-1", Path="/images/blog/blog-one.jpg"  }
             },
             new Blog
             {
                 Id=2,
-                Heading="GIRLS PINK T SHIRT ARRIVED IN STORE",
+                Heading="GIRLS PINK T SHIRT ARRIVED IN STORE-2",
                 Author="Mac Doe",
                 MainText=loremText,
                 CreationTime= new DateTime(2013, 12, 5, 13, 33, 0),
                 Tags=new List<string>(){"Pink", "T-Shirt", "Girls"},
-                Image=new BlogFile() { Id =2, Name=$"Blogimage-2",Path="~/images/blog/blog-two.jpg"}
+                Image=new BlogFile() { Id =2, Name=$"Blogimage-2",Path="/images/blog/blog-two.jpg"}
             },
             new Blog
             {
                 Id=3,
-                Heading="GIRLS PINK T SHIRT ARRIVED IN STORE",
+                Heading="GIRLS PINK T SHIRT ARRIVED IN STORE-3",
                 Author="Mac Doe",
                 MainText=loremText,
                 CreationTime= new DateTime(2013, 12, 5, 13, 33, 0),
                 Tags=new List<string>(){"Pink", "T-Shirt", "Girls"},
                 Image=new BlogFile()
-                { Id =3, Name=$"Blogimage-3", Path="~/images/blog/blog-three.jpg"  }
+                { Id =3, Name=$"Blogimage-3", Path="/images/blog/blog-three.jpg"  }
             },
             new Blog
             {
                 Id=4,
-                Heading="GIRLS PINK T SHIRT ARRIVED IN STORE",
+                Heading="GIRLS PINK T SHIRT ARRIVED IN STORE-4",
                 Author="Mac Doe",
                 MainText=loremText,
                 CreationTime= new DateTime(2013, 12, 5, 13, 33, 0),
                 Tags=new List<string>(){"Pink", "T-Shirt", "Girls"},
                 Image=new BlogFile()
-                { Id =4, Name=$"Blogimage-4", Path="~/images/blog/blog-four.jpg"  }
+                { Id =4, Name=$"Blogimage-4", Path="/images/blog/blog-one.jpg"  }
             }
         };
 
@@ -63,7 +62,7 @@ namespace WebStore_Study.Data
             new(){Id=4, LastName="Константинов", FirstName="Константин", Patronymic="Константинович", Age=34}
         };
 
-        public static string loremText = @"Lorem ipsum dolor sit amet, consectetur
+         const string loremText = @"Lorem ipsum dolor sit amet, consectetur
         adipisicing elit, sed do eiusmod tempor incididunt ut labore
         et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
         exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

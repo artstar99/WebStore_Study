@@ -24,6 +24,7 @@ namespace WebStore_Study
         {
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddTransient<IEmployeesData, InMemeoryEmplyeesData>();
+            services.AddTransient<IBlogService, InmemoryBlogService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
