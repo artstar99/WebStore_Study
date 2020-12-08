@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebStore_Study.Models;
+﻿using System.Collections.Generic;
+using WebStore_Study.Domain;
+using WebStore_Study.Domain.Entities;
 
 namespace WebStore_Study.Infrastructure.Interfaces
 {
     public interface IBlogService
     {
-        IEnumerable<Blog> LoadBlogs();
-        IEnumerable<Blog> LoadBlogsForPage(int page, int blogsPerPage);
+        IEnumerable<Blog> LoadBlogs(BlogFilter filter=null);
+        int CountBlogs();
         int CreateBlog( Blog blog);
         bool UpdateBlog(Blog blog);
         Blog GetBlog(int id);
