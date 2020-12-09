@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebStore_Study.DAL.Context;
 using WebStore_Study.Infrastructure;
 
 namespace WebStore_Study
@@ -18,6 +20,8 @@ namespace WebStore_Study
         {
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddUserServices();
+            services.AddDbContext<WebStore_StudyDb>(opt => opt.UseSqlServer(configuration.GetConnectionString("Default")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
