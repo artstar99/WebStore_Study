@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore_Study.Infrastructure.Interfaces;
+using WebStore_Study.Infrastructure.Implementations;
 
 namespace WebStore_Study
 {
@@ -20,7 +22,9 @@ namespace WebStore_Study
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddRazorRuntimeCompilation();            
+            services.AddMvc().AddRazorRuntimeCompilation();
+            services.AddTransient<IEmployeesData, InMemeoryEmplyeesData>();
+            services.AddTransient<IBlogService, InmemoryBlogService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,6 +33,7 @@ namespace WebStore_Study
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
             }
 
             app.UseStaticFiles();

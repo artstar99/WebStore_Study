@@ -1,23 +1,50 @@
-﻿@model Employee
+﻿@model EmployeesViewModel
+
+@{
+    ViewBag.Title = $"Добавление нового сотрудника";
+ }
 
 <div class="container">
 
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <h2>Добавить нового сотрудника</h2>
-            <form asp-action="EndAddEmployee" method="post">
-                <input type="hidden" name="emp.Id" value=@Model.Id><br>
-                <label>Имя:</label><br>
-                <input type="text" name="emp.FirstName" value=@Model.FirstName><br>
-                <label>Фамилия:</label><br>
-                <input type="text" name="emp.LastName" value=@Model.LastName><br>
-                <label>Отчество:</label><br>
-                <input type="text" name="emp.Patronymic" value=@Model.Patronymic><br>
-                <label>Возраст:</label><br>
-                <input type="text" name="emp.Age" value=@Model.Age><br>
-                <input style="margin:10px 0px" class="btn btn-info" type="submit" value="Сохранить">
-                <input style="margin: 10px 10px" class="btn btn-default" type="reset" value="Сбросить">
-                <a style="margin: 10px 0px" class="btn btn-danger" asp-action="Index" >Отмена</a>
+            <form asp-action="EndAddEmployee">
+                
+                <div asp-validation-summary="ModelOnly" ></div>
+                
+                <div class="form-group">
+                    <label asp-for="FirstName">Имя:</label><br>
+                    <input type="text" asp-for="FirstName"  class="form-control">
+                    <span asp-validation-for="FirstName" class="text-danger"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LastName">Фамилия:</label><br>
+                    <input type="text" asp-for="LastName"  class="form-control">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Patronymic">Отчество:</label><br>
+                    <input type="text" asp-for="Patronymic"   class="form-control">
+                    <span asp-validation-for="Patronymic" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Age">Возраст:</label><br>
+                    <input asp-for="Age" type="number"  class="form-control"><br />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <input style="margin:10px 0px" class="btn btn-info" type="submit" value="Сохранить">
+                    <input style="margin: 10px 10px" class="btn btn-default" type="reset" value="Сбросить">
+                    <a style="margin: 10px 0px" class="btn btn-danger" asp-action="Index">Отмена</a>
+                </div>
+
+
+
             </form>
 
         </div>
