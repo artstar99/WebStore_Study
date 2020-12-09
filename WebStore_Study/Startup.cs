@@ -1,15 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebStore_Study.Infrastructure.Interfaces;
-using WebStore_Study.Infrastructure.Implementations;
+using WebStore_Study.Infrastructure;
 
 namespace WebStore_Study
 {
@@ -23,9 +17,7 @@ namespace WebStore_Study
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddRazorRuntimeCompilation();
-            services.AddTransient<IEmployeesData, InMemeoryEmplyeesData>();
-            services.AddTransient<IBlogService, InmemoryBlogService>();
-            services.AddTransient<IProductData, InmemeoryProductData>();
+            services.AddUserServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
