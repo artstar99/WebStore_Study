@@ -8,6 +8,7 @@ namespace WebStore_Study.DAL.Context
 {
     public class WebStore_StudyDb:DbContext
     {
+        public DbSet<Blog> Blogs { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Section> Sections { get; set; }
