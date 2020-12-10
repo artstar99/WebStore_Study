@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebStore_Study.Domain.Entities;
 
 namespace WebStore_Study.DAL.Context
 {
-    public class WebStore_StudyDb:DbContext
+    public class WebStore_StudyDb:IdentityDbContext
     {
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -19,7 +20,6 @@ namespace WebStore_Study.DAL.Context
         protected override void OnModelCreating(ModelBuilder model)
         {
             base.OnModelCreating(model);
-            
         }
     }
 }
