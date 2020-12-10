@@ -17,7 +17,8 @@ namespace WebStore_Study.Infrastructure
         public static IServiceCollection AddUserServices(this IServiceCollection services)
         {
             services.AddTransient<IEmployeesData, InMemeoryEmplyeesData>();
-            services.AddTransient<IBlogService, InmemoryBlogService>();
+            //services.AddTransient<IBlogService, InmemoryBlogService>();
+            services.AddTransient<IBlogService, SqlBlogData>();
             //services.AddTransient<IProductData, InmemeoryProductData>();
             services.AddTransient<IProductData, SqlProductData>();
             services.AddTransient<WebStore_StudyDbInitializer>();
