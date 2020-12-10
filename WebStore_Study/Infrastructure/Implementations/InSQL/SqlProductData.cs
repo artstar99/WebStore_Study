@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
         {
             this.dbContext = dbContext;
         }
-        public IEnumerable<Brand> GetBrands() => dbContext.Brands;
+        public IEnumerable<Brand> GetBrands() => dbContext.Brands.Include(b=>b.Products);
 
         public IEnumerable<Section> GetSections() => dbContext.Sections;
 

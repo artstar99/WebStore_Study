@@ -11,5 +11,6 @@ namespace WebStore_Study.ViewModels
         public int Order { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
+        public int ProductsCount { get; set; }
     }
 }
