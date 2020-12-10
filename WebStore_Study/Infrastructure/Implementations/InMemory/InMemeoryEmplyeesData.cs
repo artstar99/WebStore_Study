@@ -6,7 +6,7 @@ using WebStore_Study.Data;
 using WebStore_Study.Infrastructure.Interfaces;
 using WebStore_Study.Models;
 
-namespace WebStore_Study.Infrastructure.Implementations
+namespace WebStore_Study.Infrastructure.Implementations.InMemory
 {
     public class InMemeoryEmplyeesData : IEmployeesData
     {
@@ -14,7 +14,7 @@ namespace WebStore_Study.Infrastructure.Implementations
 
         public IEnumerable<Employee> Load() => employees;
         public Employee GetById(int id) => employees.FirstOrDefault(e => e.Id == id);
-        
+
         public int Add(Employee employee)
         {
             if (employee is null)
@@ -24,7 +24,7 @@ namespace WebStore_Study.Infrastructure.Implementations
             employees.Add(employee);
             return employee.Id;
         }
-    
+
         public void Delete(int id)
         {
             var employee = GetById(id);
@@ -44,7 +44,7 @@ namespace WebStore_Study.Infrastructure.Implementations
                 return 0;
 
 
-            
+
             item.FirstName = employee.FirstName;
             item.LastName = employee.LastName;
             item.Patronymic = employee.Patronymic;

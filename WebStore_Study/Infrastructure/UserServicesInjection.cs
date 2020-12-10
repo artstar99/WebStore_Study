@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebStore_Study.DAL.Context;
-using WebStore_Study.Infrastructure.Implementations;
+using WebStore_Study.Data;
+using WebStore_Study.Infrastructure.Implementations.InMemory;
+using WebStore_Study.Infrastructure.Implementations.InSQL;
 using WebStore_Study.Infrastructure.Interfaces;
 
 namespace WebStore_Study.Infrastructure
@@ -16,7 +18,9 @@ namespace WebStore_Study.Infrastructure
         {
             services.AddTransient<IEmployeesData, InMemeoryEmplyeesData>();
             services.AddTransient<IBlogService, InmemoryBlogService>();
-            services.AddTransient<IProductData, InmemeoryProductData>();
+            //services.AddTransient<IProductData, InmemeoryProductData>();
+            services.AddTransient<IProductData, SqlProductData>();
+            services.AddTransient<WebStore_StudyDbInitializer>();
            
             return services;
         }

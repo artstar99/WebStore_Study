@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore_Study.DAL.Context;
+using WebStore_Study.Data;
 using WebStore_Study.Infrastructure;
 
 namespace WebStore_Study
@@ -25,8 +26,9 @@ namespace WebStore_Study
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStore_StudyDbInitializer db)
         {
+            db.Initialize();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
