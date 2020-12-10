@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore_Study.Data;
-using WebStore_Study.Models;
+using WebStore_Study.Domain.Entities;
 using WebStore_Study.Infrastructure.Interfaces;
 using WebStore_Study.ViewModels;
 
@@ -20,7 +20,18 @@ namespace WebStore_Study.Controllers
         public IActionResult Index()
         {
             var employees = employeesDataService.Load();
-            return View(employees);
+            List<EmployeesViewModel> viewModelList = new List<EmployeesViewModel>();
+            foreach (var employee in employees)
+            {
+                viewModelList.Add(new EmployeesViewModel
+                {
+                    Id=employee.Id,
+                    FirstName=employee.FirstName,
+                    LastName=employee.LastName,
+                    Age=employee.Age,
+                });
+            }
+            return View(viewModelList);
         }
         public IActionResult EmployeeDetail(int id)
         {
@@ -28,7 +39,14 @@ namespace WebStore_Study.Controllers
             if (employee == null)
                 return NotFound();
 
-            return View(employee); // View("Error404");
+
+            return View(new EmployeesViewModel
+            {
+                Id=employee.Id,
+                FirstName=employee.FirstName,
+                LastName=employee.LastName,
+                Age=employee.Age,
+            }); 
         }
 
         public IActionResult DeleteEmployee(int id)
@@ -81,13 +99,13 @@ namespace WebStore_Study.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("EditEmployee", employeesViewModel.Id);
+                return View("EditEmployee", employeesViewModel);
             }
             
             if (employeesViewModel is null)
                 throw new ArgumentNullException(nameof(employeesViewModel));
 
-            Employee employee = new()
+            Employee employee = new Employee()
             {
                 Id = employeesViewModel.Id,
                 FirstName = employeesViewModel.FirstName,
@@ -110,7 +128,7 @@ namespace WebStore_Study.Controllers
                 return View("AddEmployee", employeesViewModel);
 
 
-            Employee employee = new()
+            Employee employee = new Employee()
             {
                 FirstName = employeesViewModel.FirstName,
                 LastName = employeesViewModel.LastName,

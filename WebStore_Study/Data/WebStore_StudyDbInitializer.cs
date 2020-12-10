@@ -34,21 +34,78 @@ namespace WebStore_Study.Data
                 logger.LogInformation("Структура БД в актуальном состоянии...");
             }
 
+            //Инициализация товаров
             try
             {
                 logger.LogInformation("Начало инициализации данных...");
-                InitializeData();
+                InitializeProducts();
                 logger.LogInformation("Инициализация данных прошла успешно...");
             }
             catch (Exception e)
             {
                 logger.LogInformation("ОШИБКА!!! "+e.Message);
             }
-            
-            
+
+            //Инициализация данных о сотрудниках
+            try
+            {
+                logger.LogInformation("Начало инициализации данных о сотрудниках...");
+                InitializeEmployees();
+                logger.LogInformation("Инициализация данных о сотрудниках прошла успешно...");
+            }
+            catch (Exception e)
+            {
+                logger.LogInformation("ОШИБКА!!! " + e.Message);
+            }
+
+            //Инициализация данных блогов
+            try
+            {
+                logger.LogInformation("Начало инициализации данных блогов...");
+                InitializeBlogs();
+                logger.LogInformation("Инициализация данных блогов прошла успешно...");
+            }
+            catch (Exception e)
+            {
+                logger.LogInformation("ОШИБКА!!! " + e.Message);
+            }
+
+
         }
 
-        private void InitializeData()
+        private void InitializeBlogs()
+        {
+            if (dbContext.Blogs.Any())
+            {
+                return;
+            }
+            using (dbContext.Database.BeginTransaction())
+            {
+                dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Blogs] ON");
+                dbContext.Blogs.AddRange(TestData.Blogs);
+                dbContext.SaveChanges();
+                dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Blogs] OFF");
+                dbContext.Database.CommitTransaction();
+            }
+        }
+
+        private void InitializeEmployees()
+        {
+            if (dbContext.Employees.Any())
+            {
+                return;
+            }
+            using (dbContext.Database.BeginTransaction())
+            {
+                dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Employees] ON");
+                dbContext.Employees.AddRange(TestData.Employees);
+                dbContext.SaveChanges();
+                dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Employees] OFF");
+                dbContext.Database.CommitTransaction();
+            }
+        }
+
+        private void InitializeProducts()
         {
             if (dbContext.Products.Any())
             {
@@ -82,14 +139,7 @@ namespace WebStore_Study.Data
                 dbContext.Database.CommitTransaction();
             }
 
-            using (dbContext.Database.BeginTransaction())
-            {
-                dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Blogs] ON");
-                dbContext.Blogs.AddRange(TestData.Blogs);
-                dbContext.SaveChanges();
-                dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Blogs] OFF");
-                dbContext.Database.CommitTransaction();
-            }
+            
 
         }
     }

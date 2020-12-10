@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebStore_Study.Models;
+using WebStore_Study.Domain.Entities;
+
 
 namespace WebStore_Study.Infrastructure.Interfaces
 {
@@ -10,7 +11,7 @@ namespace WebStore_Study.Infrastructure.Interfaces
     {
         IEnumerable<Employee> Load();
         Employee GetById(int id);
-        int Add(Employee employee);
+        void Add(Employee employee);
         int Update(Employee emp);
         void Delete(int id);
 

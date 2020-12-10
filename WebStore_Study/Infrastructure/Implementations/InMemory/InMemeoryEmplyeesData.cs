@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore_Study.Data;
+using WebStore_Study.Domain.Entities;
 using WebStore_Study.Infrastructure.Interfaces;
-using WebStore_Study.Models;
+
 
 namespace WebStore_Study.Infrastructure.Implementations.InMemory
 {
@@ -15,14 +16,13 @@ namespace WebStore_Study.Infrastructure.Implementations.InMemory
         public IEnumerable<Employee> Load() => employees;
         public Employee GetById(int id) => employees.FirstOrDefault(e => e.Id == id);
 
-        public int Add(Employee employee)
+        public void Add(Employee employee)
         {
             if (employee is null)
-                return 0;
+                return;
 
             employee.Id = employees.Max(e => e.Id) + 1;
             employees.Add(employee);
-            return employee.Id;
         }
 
         public void Delete(int id)
@@ -51,6 +51,8 @@ namespace WebStore_Study.Infrastructure.Implementations.InMemory
             item.Age = employee.Age;
             return item.Id;
         }
+
+
 
     }
 }
