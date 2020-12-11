@@ -15,7 +15,7 @@
                     {
                         @* начало блога *@
                         <div class="single-blog-post">
-                            <h3>@Model.Blogs[i].Heading</h3>
+                            <h3>@Model.Blogs[i].Name</h3>
                             <div class="post-meta">
                                 <ul>
                                     <li><i class="fa fa-user"></i> @Model.Blogs[i].Author</li>
@@ -31,7 +31,7 @@
                                 </span>
                             </div>
                             <a href="">
-                                <img src=@Model.Blogs[i].Image.Path alt="">
+                                <img src="~/images/blog/@Model.Blogs[i].ImageName" alt="">
                             </a>
                             <p>@Model.Blogs[i].MainText</p>
                             <a class="btn btn-primary" href="">Read More</a>
@@ -89,7 +89,9 @@
                             @for (int i = 1; i <= Model.NumberOfPages; i++)
                             {
                                 <li>
-                                    <a href="" @{if (i == Model.CurrentPage) { <text> class="active" </text> } }>@i</a>
+                                    <a asp-action="Index" asp-route-page="@i">
+                                        @i
+                                    </a>
                                 </li>
                             }
 

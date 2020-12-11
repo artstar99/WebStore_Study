@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore_Study.Domain;
+using WebStore_Study.Domain.Entities;
 using WebStore_Study.Infrastructure.Interfaces;
 using WebStore_Study.ViewModels;
 
@@ -12,29 +14,44 @@ namespace WebStore_Study.Controllers
     {
         private readonly IBlogService blogService;
         private readonly int blogsPerPage = 3;
+        private int numberOfPages;
         public BlogsController(IBlogService blogService)
         {
             this.blogService = blogService;
         }
-        public IActionResult Index()
-        {
-            var numberOfBlogs = blogService.LoadBlogs().Count();
 
-            BlogsViewModel blogsViewModel = new BlogsViewModel()
+
+        public IActionResult Index(int? page = null)
+        {
+            var filter = new BlogFilter { BlogsPerPage = blogsPerPage };
+
+            if (numberOfPages == 0)
+                numberOfPages = CountNumberOfPages();
+
+            if (page == null)
             {
-                Blogs = blogService.LoadBlogsForPage(1, blogsPerPage).ToList(),
-                NumberOfPages = numberOfBlogs % blogsPerPage > 0? numberOfBlogs / blogsPerPage+1: numberOfBlogs / blogsPerPage,
-                CurrentPage = 1
-            };
-            
-            return View(blogsViewModel);
+                var blogs = blogService.LoadBlogs(filter);
+                var viewModel = new BlogsViewModel() { Blogs = blogs.ToList(), CurrentPage = 1, NumberOfPages=numberOfPages};
+                return View(viewModel);
+            }
+            else
+            {
+                filter.CurrentPage = page;
+                var blogs = blogService.LoadBlogs(filter);
+                var viewModel=new BlogsViewModel() { Blogs = blogs.ToList(), CurrentPage = (int)page, NumberOfPages = numberOfPages };
+                return View(viewModel);
+            }
 
         }
-        public IActionResult Page(int id)
+
+        private int CountNumberOfPages()
         {
-            var blogs = blogService.LoadBlogsForPage(1, blogsPerPage);
-            return View(blogs);
+            var numberOfBlogs = blogService.CountBlogs();
+            
+            return numberOfBlogs % blogsPerPage > 0 ? numberOfBlogs / blogsPerPage + 1 : numberOfBlogs / blogsPerPage;
         }
+
+
         public IActionResult BlogSingle()
         {
             return View();
