@@ -8,7 +8,7 @@ using WebStore_Study.Infrastructure.Interfaces;
 
 namespace WebStore_Study.Infrastructure.Implementations.InSQL
 {
-    public class SqlEmployeeData : IEmployeesData
+    public class SqlEmployeeData : IUsersData
     {
         private readonly WebStore_StudyDb dbContext;
 
@@ -17,48 +17,49 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
             this.dbContext = dbContext;
         }
 
-        public void Add(Employee employee)
+        public void Add(User employee)
         {
             if (employee is null)
                 return;
 
             using (dbContext.Database.BeginTransaction())
             {
-                dbContext.Employees.Add(employee);
+                dbContext.Users.Add(employee);
                 dbContext.SaveChanges();
                 dbContext.Database.CommitTransaction();
             }
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             var employee = GetById(id);
             using (dbContext.Database.BeginTransaction())
             {
-                dbContext.Employees.Remove(employee);
+                dbContext.Users.Remove(employee);
                 dbContext.SaveChanges();
                 dbContext.Database.CommitTransaction();
             }
         }
 
-        public Employee GetById(int id) => dbContext.Employees.FirstOrDefault(e => e.Id == id);
+        public User GetById(string id) => dbContext.Users.FirstOrDefault(e => e.Id == id);
 
-        public IEnumerable<Employee> Load()
+        public IEnumerable<User> Load()
         {
-            return dbContext.Employees.ToList();
+            return dbContext.Users.ToList();
         }
 
-        public int Update(Employee emp)
+        public bool Update(User emp)
         {
             if (emp == null)
                 throw new ArgumentNullException(nameof(emp));
 
-            if (dbContext.Employees.Contains(emp))
-                return emp.Id;
+
+            if (dbContext.Users.Contains(emp))
+                return false;
 
             var item = GetById(emp.Id);
             if (item == null)
-                return 0;
+                return false;
             using (dbContext.Database.BeginTransaction())
             {
                 item.FirstName = emp.FirstName;
@@ -68,7 +69,7 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
 
                 dbContext.SaveChanges();
                 dbContext.Database.CommitTransaction();
-                return item.Id;
+                return true;
             }
 
         }

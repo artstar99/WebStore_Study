@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore_Study.DAL.Context;
 using WebStore_Study.Data;
+using WebStore_Study.Domain.Entities;
 using WebStore_Study.Infrastructure;
 
 namespace WebStore_Study
@@ -22,7 +23,7 @@ namespace WebStore_Study
         {
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddUserServices();
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
                     .AddEntityFrameworkStores<WebStore_StudyDb>();
             services.AddDbContext<WebStore_StudyDb>(opt => opt.UseSqlServer(configuration.GetConnectionString("Default")));
 

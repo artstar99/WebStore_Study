@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WebStore_Study.ViewModels
 {
-    public class EmployeesViewModel
+    public class UsersViewModel
     {
       
-        public int Id { get; set; }
+        public string Id { get; set; }
 
 
         /// <summary> Имя </summary>

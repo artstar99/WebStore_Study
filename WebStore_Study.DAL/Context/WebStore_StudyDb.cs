@@ -7,13 +7,13 @@ using WebStore_Study.Domain.Entities;
 
 namespace WebStore_Study.DAL.Context
 {
-    public class WebStore_StudyDb:IdentityDbContext
+    public class WebStore_StudyDb:IdentityDbContext<User>
     {
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Section> Sections { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+        public override DbSet<User> Users { get; set; }
 
         public WebStore_StudyDb(DbContextOptions<WebStore_StudyDb> options) :base(options) {}
 

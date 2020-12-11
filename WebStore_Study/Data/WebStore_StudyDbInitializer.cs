@@ -50,7 +50,7 @@ namespace WebStore_Study.Data
             try
             {
                 logger.LogInformation("Начало инициализации данных о сотрудниках...");
-                InitializeEmployees();
+                InitializeUsers();
                 logger.LogInformation("Инициализация данных о сотрудниках прошла успешно...");
             }
             catch (Exception e)
@@ -89,18 +89,18 @@ namespace WebStore_Study.Data
             }
         }
 
-        private void InitializeEmployees()
+        private void InitializeUsers()
         {
-            if (dbContext.Employees.Any())
+            if (dbContext.Users.Any())
             {
                 return;
             }
             using (dbContext.Database.BeginTransaction())
             {
-                dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Employees] ON");
-                dbContext.Employees.AddRange(TestData.Employees);
+                dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Users] ON");
+                dbContext.Users.AddRange(TestData.Users);
                 dbContext.SaveChanges();
-                dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Employees] OFF");
+                dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Users] OFF");
                 dbContext.Database.CommitTransaction();
             }
         }
