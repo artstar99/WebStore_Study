@@ -14,7 +14,7 @@ namespace WebStore_Study.Controllers
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
-        public LoginController( UserManager<User> userManager,
+        public LoginController(UserManager<User> userManager,
                                 SignInManager<User> signInManager)
         {
             this.userManager = userManager;
@@ -30,17 +30,39 @@ namespace WebStore_Study.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Register(LoginViewModel model)
+        public async Task<IActionResult> Register(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View("Index", model);
+                
+                return View(model); ;
             }
 
-            var user = new User { };
-
+            var user = new User
+            {
+                UserName=model.Email,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Age = model.Age,
+            };
+            var result = await userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+               await signInManager.SignInAsync(user, isPersistent: false);
+               return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError($"{error.Code}", error.Description);
+                }
+                
+                return View(model);
+            }
             
-            return RedirectToAction("Index", "Home");
+
         }
     }
 }

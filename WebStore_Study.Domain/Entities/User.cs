@@ -14,7 +14,6 @@ namespace WebStore_Study.Domain.Entities
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        [Required]
         public string Patronymic { get; set; }
         public int Age { get; set; }
 
