@@ -6,35 +6,37 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.ViewModels;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace WebStore_Study.Controllers
 {
-    public class LoginController : Controller
+    public class AccountController : Controller
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
-        public LoginController(UserManager<User> userManager,
+        public AccountController(UserManager<User> userManager,
                                 SignInManager<User> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return View();
         }
 
-        public IActionResult Login(LoginViewModel model)
+        public IActionResult Register()
         {
-            return RedirectToAction("Index", "Home");
+            return View();
         }
 
+    
+        [HttpPost]
         public async Task<IActionResult> Register(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                
                 return View(model); ;
             }
 

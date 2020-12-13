@@ -41,10 +41,10 @@ namespace WebStore_Study.ViewModels
 
         #region Login Props
 
-        [Required]
-        [EmailAddress(ErrorMessage = "Некорректный адрес")]
-        [Display(Name = "E-mail")]
-        public string EmailLogin { get; set; }
+        //[Required]
+        //[EmailAddress(ErrorMessage = "Некорректный адрес")]
+        //[Display(Name = "E-mail")]
+        //public string EmailLogin { get; set; }
         //[Required]
         //[DataType(DataType.Password)]
         //[Display(Name = "Пароль")]
