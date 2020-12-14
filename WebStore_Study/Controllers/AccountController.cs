@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.ViewModels;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace WebStore_Study.Controllers
 {
@@ -15,25 +11,31 @@ namespace WebStore_Study.Controllers
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
-        public AccountController(UserManager<User> userManager,
-                                SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-   
-        
+
+
         public IActionResult Login(string ReturnUrl)
         {
-            //var model = Request.Headers["Referer"];
-            return View(new LoginViewModel{ReturnUrl=ReturnUrl});
+
+            if (ReturnUrl == null)
+            {
+
+                var localUrl = Request.Headers["Referer"].ToString().Replace("http://localhost:63874", "");
+                return View(new LoginViewModel { ReturnUrl = localUrl});
+            }
+
+            return View(new LoginViewModel { ReturnUrl = ReturnUrl });
         }
 
         [HttpPost]
-        public async Task <IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
-           
+
             var loginResult = await signInManager.PasswordSignInAsync(
                 model.Email,
                 model.Password,

@@ -10,7 +10,7 @@ using WebStore_Study.ViewModels;
 
 namespace WebStore_Study.Controllers
 {
-    [Authorize]
+    
     public class CatalogController : Controller
     {
         private readonly IProductData productData;
