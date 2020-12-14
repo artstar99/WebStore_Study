@@ -22,21 +22,18 @@ namespace WebStore_Study.Controllers
             this.signInManager = signInManager;
         }
    
-        [HttpGet]
-        public IActionResult Login(string returnUrl)
+        
+        public IActionResult Login(string ReturnUrl)
         {
             //var model = Request.Headers["Referer"];
-            return View(new LoginViewModel{ReturnUrl=returnUrl});
+            return View(new LoginViewModel{ReturnUrl=ReturnUrl});
         }
 
-
+        [HttpPost]
         public async Task <IActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
+            if (!ModelState.IsValid) return View(model);
+           
             var loginResult = await signInManager.PasswordSignInAsync(
                 model.Email,
                 model.Password,
@@ -103,5 +100,7 @@ namespace WebStore_Study.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult AccessDenied() => View();
     }
 }
