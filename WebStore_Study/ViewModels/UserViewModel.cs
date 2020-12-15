@@ -18,9 +18,9 @@ namespace WebStore_Study.ViewModels
         /// <summary> Фамилия </summary>
         [Required (ErrorMessage = "Не указана фамилия")]
         public string LastName { get; set; }
-        /// <summary> Отчество </summary>
-        [Required (ErrorMessage = "Не указано отчество")]
-        public string Patronymic { get; set; }
+
+        public string Email { get; set; }
+       
         /// <summary> Возраст </summary>
         public int Age { get; set; }
         

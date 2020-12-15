@@ -30,6 +30,7 @@ namespace WebStore_Study.Controllers
                     Id = employee.Id,
                     FirstName = employee.FirstName,
                     LastName = employee.LastName,
+                    Email=employee.Email,
                     Age = employee.Age,
                 });
             }
@@ -47,6 +48,7 @@ namespace WebStore_Study.Controllers
                 Id = employee.Id,
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
+                Email=employee.Email,
                 Age = employee.Age,
             });
         }
@@ -62,7 +64,7 @@ namespace WebStore_Study.Controllers
                 Id = employee.Id,
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
-                Patronymic = employee.Patronymic,
+                Email = employee.Email,
                 Age = employee.Age,
             };
             return View(UsersViewModel);
@@ -90,7 +92,7 @@ namespace WebStore_Study.Controllers
                 Id = employee.Id,
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
-                Patronymic = employee.Patronymic,
+                Email = employee.Email,
                 Age = employee.Age,
 
             });
@@ -110,7 +112,7 @@ namespace WebStore_Study.Controllers
                 Id = UsersViewModel.Id,
                 FirstName = UsersViewModel.FirstName,
                 LastName = UsersViewModel.LastName,
-                Patronymic = UsersViewModel.Patronymic,
+                Email = UsersViewModel.Email,
                 Age = UsersViewModel.Age,
             };
             UsersDataService.Update(employee);
@@ -132,7 +134,7 @@ namespace WebStore_Study.Controllers
             {
                 FirstName = UsersViewModel.FirstName,
                 LastName = UsersViewModel.LastName,
-                Patronymic = UsersViewModel.Patronymic,
+                Email = UsersViewModel.Email,
                 Age = UsersViewModel.Age,
             };
 
