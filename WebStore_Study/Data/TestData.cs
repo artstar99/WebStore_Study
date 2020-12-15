@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore_Study.Domain.Entities;
-using WebStore_Study.Models;
 
 namespace WebStore_Study.Data
 {
@@ -53,12 +52,12 @@ namespace WebStore_Study.Data
             }
         };
 
-        public static List<Employee> Employees { get; } = new List<Employee>()
+        public static List<User> Users { get; } = new List<User>()
         {
-            new(){Id=1, LastName="Иванов", FirstName="Иван", Patronymic="Иванович", Age=31},
-            new(){Id=2, LastName="Петров", FirstName="Пётр", Patronymic="Петрович", Age=32},
-            new(){Id=3, LastName="Сидоров", FirstName="Сидор", Patronymic="Сидорович", Age=33},
-            new(){Id=4, LastName="Константинов", FirstName="Константин", Patronymic="Константинович", Age=34}
+            new User(){LastName="Иванов", FirstName="Иван", Patronymic="Иванович", Age=31},
+            new User(){LastName="Петров", FirstName="Пётр", Patronymic="Петрович", Age=32},
+            new User(){LastName="Сидоров", FirstName="Сидор", Patronymic="Сидорович", Age=33},
+            new User(){LastName="Константинов", FirstName="Константин", Patronymic="Константинович", Age=34}
         };
 
         const string loremText = @"Lorem ipsum dolor sit amet, consectetur
@@ -127,7 +126,7 @@ namespace WebStore_Study.Data
                 new Brand{Id = 7,Name = "Rösch creative culture",Order = 6}
         };
 
-        public static List<Product> Products { get; } = new()
+        public static List<Product> Products { get; } = new List<Product>()
         {
             new Product(){Id = 1,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product1.jpg",Order = 0,SectionId = 2,BrandId = 1},
             new Product(){Id = 2,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product2.jpg",Order = 1,SectionId = 2,BrandId = 1},

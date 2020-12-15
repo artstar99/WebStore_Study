@@ -1,21 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebStore_Study.Models
+namespace WebStore_Study.ViewModels
 {
-    /// <summary> Сотрудники </summary>
-    public class Employee
+    public class UsersViewModel
     {
-        public int Id { get; set; }
+      
+        public string Id { get; set; }
+
+
         /// <summary> Имя </summary>
+        [Required (ErrorMessage = "Не указано имя")]
         public string FirstName { get; set; }
         /// <summary> Фамилия </summary>
+        [Required (ErrorMessage = "Не указана фамилия")]
         public string LastName { get; set; }
         /// <summary> Отчество </summary>
+        [Required (ErrorMessage = "Не указано отчество")]
         public string Patronymic { get; set; }
         /// <summary> Возраст </summary>
         public int Age { get; set; }
+        
     }
 }

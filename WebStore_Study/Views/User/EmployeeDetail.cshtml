@@ -1,9 +1,8 @@
-﻿@model EmployeesViewModel
+﻿@model UsersViewModel
+
 @{
-    ViewData["Title"] = $"Подтвердите удаление данных сотрудника {Model.LastName} {Model.FirstName}";
+    ViewBag.Title = $"Информация о сотруднике {Model.LastName} {Model.FirstName}";
 }
-
-
 
 <div class="container">
 
@@ -29,10 +28,7 @@
     <hr />
     <div class="row">
         <div class="col-sm-5">
-            <form asp-action="EndDeleteEmployee" asp-route-id="@Model.Id" method="post">
-                <input style="margin:10px 0px" class="btn btn-danger" type="submit" value="Удалить">
-            </form>
-            <a style="margin:10px 0px" asp-action="Index" class="btn btn-info">Вернуться назад</a>
+            <a asp-action="Index" class="btn btn-default">К списку</a>
         </div>
 
     </div>

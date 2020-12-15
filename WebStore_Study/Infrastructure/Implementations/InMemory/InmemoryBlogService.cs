@@ -6,7 +6,7 @@ using WebStore_Study.Domain;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Infrastructure.Interfaces;
 
-namespace WebStore_Study.Infrastructure.Implementations
+namespace WebStore_Study.Infrastructure.Implementations.InMemory
 {
     public class InmemoryBlogService : IBlogService
     {
@@ -22,7 +22,7 @@ namespace WebStore_Study.Infrastructure.Implementations
             if (filter?.CurrentPage != null)
             {
                 var blogsOnPage = filter.BlogsPerPage;
-                var selectionIndex = blogList.Count - (Int32)filter.CurrentPage * filter.BlogsPerPage;
+                var selectionIndex = blogList.Count - (int)filter.CurrentPage * filter.BlogsPerPage;
                 while (selectionIndex < 0)
                 {
                     selectionIndex++;
