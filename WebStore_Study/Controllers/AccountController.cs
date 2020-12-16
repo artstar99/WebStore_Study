@@ -84,6 +84,7 @@ namespace WebStore_Study.Controllers
             var result = await userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                await userManager.AddToRoleAsync(user, Role.User);
                 await signInManager.SignInAsync(user, true);
                 return RedirectToAction("Index", "Home");
             }

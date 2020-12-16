@@ -12,6 +12,7 @@ namespace WebStore_Study.ViewModels
         [EmailAddress(ErrorMessage = "Некорректный адрес")]
         [Display(Name = "E-mail")]
         public string Email { get; set; }
+        
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
