@@ -31,5 +31,16 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
                 query = query.Where(p => p.SectionId == filter.SectionId);
             return query;
         }
+
+        public Section GetSectionById(int id) =>
+            dbContext.Sections.Include(s => s.Products).FirstOrDefault(s => s.Id == id);
+
+        public Brand GetBrandById(int id) =>
+            dbContext.Brands.Include(brand => brand.Products).FirstOrDefault(b => b.Id == id);
+
+        public Product GetProductById(int id) => dbContext.Products
+            .Include(p => p.Brand)
+            .Include(p => p.Section)
+            .FirstOrDefault(p => p.Id == id);
     }
 }
