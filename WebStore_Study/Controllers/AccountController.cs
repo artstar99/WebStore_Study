@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.ViewModels;
 
 namespace WebStore_Study.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<User> userManager;
@@ -17,7 +19,7 @@ namespace WebStore_Study.Controllers
             this.signInManager = signInManager;
         }
 
-
+        [AllowAnonymous]
         public IActionResult Login(string ReturnUrl)
         {
 
@@ -31,7 +33,7 @@ namespace WebStore_Study.Controllers
             return View(new LoginViewModel { ReturnUrl = ReturnUrl });
         }
 
-        [HttpPost]
+        [HttpPost][AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -59,13 +61,13 @@ namespace WebStore_Study.Controllers
         }
 
 
-
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost][AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
@@ -84,6 +86,7 @@ namespace WebStore_Study.Controllers
             var result = await userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                await userManager.AddToRoleAsync(user, Role.User);
                 await signInManager.SignInAsync(user, true);
                 return RedirectToAction("Index", "Home");
             }
@@ -102,7 +105,10 @@ namespace WebStore_Study.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-
-        public IActionResult AccessDenied() => View();
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }

@@ -9,9 +9,20 @@ using WebStore_Study.Infrastructure.Interfaces;
 
 namespace WebStore_Study.Infrastructure.Implementations.InMemory
 {
+    [Obsolete("Класс устарел ибо устарел", true)]
     public class InmemeoryProductData : IProductData
     {
+        public Brand GetBrandById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Brand> GetBrands() => TestData.Brands;
+
+        public Product GetProductById(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public IEnumerable<Product> GetProducts(ProductFilter filter = null)
         {
@@ -22,6 +33,11 @@ namespace WebStore_Study.Infrastructure.Implementations.InMemory
             if (filter?.BrandId != null)
                 query = query.Where(p => p.BrandId == filter.BrandId).ToList();
             return query;
+        }
+
+        public Section GetSectionById(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Section> GetSections() => TestData.Sections;

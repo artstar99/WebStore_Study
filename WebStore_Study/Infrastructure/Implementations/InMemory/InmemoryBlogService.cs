@@ -8,6 +8,7 @@ using WebStore_Study.Infrastructure.Interfaces;
 
 namespace WebStore_Study.Infrastructure.Implementations.InMemory
 {
+    [Obsolete("Класс устарел", true)]
     public class InmemoryBlogService : IBlogService
     {
         private readonly List<Blog> blogList = TestData.Blogs;

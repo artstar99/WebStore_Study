@@ -1,16 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using WebStore_Study.Domain;
 using WebStore_Study.Infrastructure.Interfaces;
+using WebStore_Study.Infrastructure.Mapping;
 using WebStore_Study.ViewModels;
 
 namespace WebStore_Study.Controllers
 {
-    
+
     public class CatalogController : Controller
     {
         private readonly IProductData productData;
@@ -29,15 +26,19 @@ namespace WebStore_Study.Controllers
                 BrandId=brandId,
                 Products= products
                 .OrderBy(p=>p.Order)
-                .Select(p=> new ProductViewModel 
-                {
-                    Id=p.Id,
-                    Name=p.Name,
-                    Order=p.Order,
-                    Price=p.Price,
-                    ImageUrl=p.ImageUrl,
-                })
+                .ToView()
             } );
+        }
+
+        public IActionResult Details(int id)
+        {
+            var product = productData.GetProductById(id);
+            if (product is null)
+                return NotFound();
+            
+            
+            
+            return View(product.ToView());
         }
     }
 }

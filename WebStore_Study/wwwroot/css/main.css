@@ -2,13 +2,13 @@
 /*************************
 *******Typography******
 **************************/
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
-@import url(http://fonts.googleapis.com/css?family=Abel);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
 
 body {
   font-family: 'Roboto', sans-serif;
-  background:;
+/*  background:;*/
   position: relative;
   font-weight:400;
 }
@@ -899,7 +899,7 @@ h2.title {
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  opacity:;
+  opacity:0.8;
 }
 
 .single-products:hover .product-overlay {
@@ -2141,7 +2141,7 @@ h2.title {
 
 .rating-area {
   border: 1px solid #F7F7F0;
-  direction: block;
+/*  direction: block;*/
   overflow: hidden;
 }
 
