@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using WebStore_Study.DAL.Context;
 using WebStore_Study.Data;
 using WebStore_Study.Domain.Entities;
@@ -23,9 +24,44 @@ namespace WebStore_Study
         {
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddUserServices();
-            services.AddIdentity<User, IdentityRole>()
-                    .AddEntityFrameworkStores<WebStore_StudyDb>();
+            services.AddIdentity<User, Role>()
+                    .AddEntityFrameworkStores<WebStore_StudyDb>()
+                    .AddDefaultTokenProviders();
             services.AddDbContext<WebStore_StudyDb>(opt => opt.UseSqlServer(configuration.GetConnectionString("Default")));
+
+            services.Configure<IdentityOptions>(opt =>
+            {
+#if DEBUG
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 3;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredUniqueChars = 3; 
+#endif
+
+                opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+                opt.Lockout.AllowedForNewUsers = true;
+                opt.Lockout.MaxFailedAccessAttempts = 10;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+
+            });
+
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.Cookie.Name = "WebStoreStudyKostyaKobetskoy";
+                opt.Cookie.HttpOnly = true;
+                opt.ExpireTimeSpan = TimeSpan.FromDays(10);
+
+                opt.LoginPath = "/Account/Login";
+                opt.LogoutPath = "/Account/Logout";
+                opt.AccessDeniedPath = "/Account/AcessDenied";
+
+                opt.SlidingExpiration = true;
+            });
+
 
         }
 
@@ -41,7 +77,9 @@ namespace WebStore_Study
 
             app.UseStaticFiles();
             app.UseRouting();
+            
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

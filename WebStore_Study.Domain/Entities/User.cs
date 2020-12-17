@@ -17,5 +17,8 @@ namespace WebStore_Study.Domain.Entities
         public string Patronymic { get; set; }
         public int Age { get; set; }
 
+        public const string Administrator = "Admin";
+        public const string DefaultAdminPassword = "Admin";
+
     }
 }
