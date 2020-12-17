@@ -59,7 +59,7 @@ namespace WebStore_Study
 
                 opt.LoginPath = "/Account/Login";
                 opt.LogoutPath = "/Account/Logout";
-                opt.AccessDeniedPath = "/Account/AcessDenied";
+                opt.AccessDeniedPath = "/Account/AccessDenied";
 
                 opt.SlidingExpiration = true;
             });

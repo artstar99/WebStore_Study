@@ -11,7 +11,7 @@ using WebStore_Study.ViewModels;
 
 namespace WebStore_Study.Controllers
 {
-    
+    [Authorize]
     public class UserController : Controller
     {
         IUsersData UsersDataService;
@@ -52,7 +52,7 @@ namespace WebStore_Study.Controllers
                 Age = employee.Age,
             });
         }
-
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult DeleteEmployee(string id)
         {
             var employee = UsersDataService.GetById(id);
@@ -71,12 +71,13 @@ namespace WebStore_Study.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult EndDeleteEmployee(string id)
         {
             UsersDataService.Delete(id);
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult EditEmployee(string id)
         {
             if (id is null)
@@ -97,6 +98,7 @@ namespace WebStore_Study.Controllers
 
             });
         }
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult EndEditEmployee(UsersViewModel UsersViewModel)
         {
             if (!ModelState.IsValid)
@@ -118,12 +120,13 @@ namespace WebStore_Study.Controllers
             UsersDataService.Update(employee);
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult AddEmployee()
         {
             return View(new UsersViewModel() {});
         }
         [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult EndAddEmployee(UsersViewModel UsersViewModel)
         {
             if (!ModelState.IsValid)

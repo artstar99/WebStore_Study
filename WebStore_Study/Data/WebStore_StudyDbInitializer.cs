@@ -30,7 +30,7 @@ namespace WebStore_Study.Data
             this.logger = logger;
         }
 
-        public async void Initialize()
+        public void Initialize()
         {
             logger.LogInformation("Инициализация БД...");
 
@@ -46,8 +46,6 @@ namespace WebStore_Study.Data
                 logger.LogInformation("Структура БД в актуальном состоянии...");
             }
 
-
-
             //Инициализация товаров
             try
             {
@@ -60,17 +58,6 @@ namespace WebStore_Study.Data
                 logger.LogInformation("ОШИБКА!!! " + e.Message);
             }
 
-            //Инициализация данных о сотрудниках
-            try
-            {
-                logger.LogInformation("Начало инициализации данных о сотрудниках...");
-                InitializeUsers();
-                logger.LogInformation("Инициализация данных о сотрудниках прошла успешно...");
-            }
-            catch (Exception e)
-            {
-                logger.LogInformation("ОШИБКА!!! " + e.Message);
-            }
 
             //Инициализация данных блогов
             try
@@ -87,7 +74,7 @@ namespace WebStore_Study.Data
             //Инициализация Identity
             try
             {
-                InitializeIdentityAsync();
+                InitializeIdentityAsync().Wait();
             }
             catch (Exception e)
             {
@@ -111,24 +98,24 @@ namespace WebStore_Study.Data
                 dbContext.SaveChanges();
                 dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Blogs] OFF");
                 dbContext.Database.CommitTransaction();
-            }
+            }   
         }
 
-        private void InitializeUsers()
-        {
-            if (dbContext.Users.Any())
-            {
-                return;
-            }
-            using (dbContext.Database.BeginTransaction())
-            {
-                dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Users] ON");
-                dbContext.Users.AddRange(TestData.Users);
-                dbContext.SaveChanges();
-                dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Users] OFF");
-                dbContext.Database.CommitTransaction();
-            }
-        }
+        //private void InitializeUsers()
+        //{
+        //    if (dbContext.Users.Any())
+        //    {
+        //        return;
+        //    }
+        //    using (dbContext.Database.BeginTransaction())
+        //    {
+        //        dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Users] ON");
+        //        dbContext.Users.AddRange(TestData.Users);
+        //        dbContext.SaveChanges();
+        //        dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Users] OFF");
+        //        dbContext.Database.CommitTransaction();
+        //    }
+        //}
 
         private void InitializeProducts()
         {
@@ -170,6 +157,14 @@ namespace WebStore_Study.Data
 
         private async Task InitializeIdentityAsync()
         {
+            async Task CheckRole(string roleName)
+            {
+                if (!await roleManager.RoleExistsAsync(roleName))
+                {
+                    await roleManager.CreateAsync(new Role { Name = roleName });
+                }
+            }
+            
             await CheckRole(Role.Administrator);
             await CheckRole(Role.User);
 
@@ -188,7 +183,6 @@ namespace WebStore_Study.Data
                     var result = await userManager.AddToRoleAsync(admin, Role.Administrator);
                     if (!result.Succeeded)
                         logger.LogError("не добавилась связь роли администратора с учетной записью");
-
                 }
                 else
                 {
@@ -197,9 +191,9 @@ namespace WebStore_Study.Data
                         $"Ошибка при создании учетной записи администратора{string.Join(',', errors)}");
                 }
 
-                dbContext.SaveChanges();
+               
             }
-            dbContext.SaveChanges();
+           
         }
 
         private async Task SetAdminRole(User user)
@@ -210,12 +204,12 @@ namespace WebStore_Study.Data
                 logger.LogError("Ошибка при создании связи учетной записи администратора и роли");
             }
         }
-        private async Task CheckRole(string roleName)
-        {
-            if (!await roleManager.RoleExistsAsync(roleName))
-            {
-                await roleManager.CreateAsync(new Role { Name = roleName });
-            }
-        }
+        //private async Task CheckRole(string roleName)
+        //{
+        //    if (!await roleManager.RoleExistsAsync(roleName))
+        //    {
+        //        await roleManager.CreateAsync(new Role { Name = roleName });
+        //    }
+        //}
     }
 }
