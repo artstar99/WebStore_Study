@@ -25,7 +25,7 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
         public IEnumerable<Product> GetProducts(ProductFilter filter = null)
         {
             IQueryable<Product> query = dbContext.Products;
-            if (filter?.Ids.Length>0)
+            if (filter?.Ids!=null && filter?.Ids.Length >0)
             {
                 query = query.Where(prod => filter.Ids.Contains(prod.Id));
             }
