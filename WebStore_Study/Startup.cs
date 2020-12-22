@@ -83,8 +83,16 @@ namespace WebStore_Study
             app.UseAuthentication();
             app.UseAuthorization();
 
+           
+
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+
+
                 //endpoints.MapGet("/greetings", async context =>{await context.Response.WriteAsync(configuration["greetings"]);});
                 endpoints.MapControllerRoute(
                     name: "default",

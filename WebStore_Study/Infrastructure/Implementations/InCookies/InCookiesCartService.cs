@@ -29,15 +29,16 @@ namespace WebStore_Study.Infrastructure.Implementations.InCookies
             get
             {
                 var context = httpContextAccessor.HttpContext;
-                var cookies = context.Response.Cookies;
-                var cartCookie = context.Request.Cookies[cartName];
+                var cookies = context.Response.Cookies; // Кука которая уйдет клиенту
+                var cartCookie = context.Request.Cookies[cartName]; // Запрашиваемая кука у клиента
                 if (cartCookie is null)
                 {
+                    
                     var cart = new Cart();
                     cookies.Append(cartName, JsonConvert.SerializeObject(cart));
                     return cart;
                 }
-                ReplaceCookies(cookies, cartCookie);
+                //ReplaceCookies(cookies, cartCookie);
                 return JsonConvert.DeserializeObject<Cart>(cartCookie);
 
             }

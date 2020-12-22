@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.ViewModels;
+using WebStore_Study.Infrastructure.Interfaces;
 
 namespace WebStore_Study.Controllers
 {
@@ -12,11 +13,13 @@ namespace WebStore_Study.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly ICartService cartService;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ICartService cartService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.cartService = cartService;
         }
 
         [AllowAnonymous]
@@ -103,7 +106,9 @@ namespace WebStore_Study.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
+            
             return RedirectToAction("Index", "Home");
+            
         }
         [AllowAnonymous]
         public IActionResult AccessDenied()
