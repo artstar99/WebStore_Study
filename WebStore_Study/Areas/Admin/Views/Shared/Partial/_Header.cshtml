@@ -5,7 +5,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index" asp-area="">
             <img src="~/Admin/img/logo.png" />
 
         </a>
@@ -13,7 +13,8 @@
     </div>
 
     <span class="logout-spn">
-        <a href="#" style="color:#fff;">LOGOUT</a>
+        
+        <a asp-controller="Account" asp-action="Logout" asp-area="" style="color: #fff;">Выйти</a>
 
     </span>
 </div>
