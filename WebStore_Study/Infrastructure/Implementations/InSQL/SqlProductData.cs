@@ -24,7 +24,10 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
 
         public IEnumerable<Product> GetProducts(ProductFilter filter = null)
         {
-            IQueryable<Product> query = dbContext.Products;
+            IQueryable<Product> query = dbContext.Products
+                .Include(p=>p.Brand)
+                .Include(p=>p.Section);
+            
             if (filter?.Ids!=null && filter?.Ids.Length >0)
             {
                 query = query.Where(prod => filter.Ids.Contains(prod.Id));
@@ -40,6 +43,22 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
            
             
             return query;
+        }
+
+        public void Update(Product productNew)
+        {
+            var product = GetProductById(productNew.Id);
+            product.Price = productNew.Price;
+            product.Name = productNew.Name;
+            product.Order = productNew.Order;
+            dbContext.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            var product = GetProductById(id);
+            dbContext.Remove(product);
+            dbContext.SaveChanges();
         }
 
         public Section GetSectionById(int id) =>

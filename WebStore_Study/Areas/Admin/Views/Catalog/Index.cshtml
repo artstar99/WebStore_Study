@@ -1,7 +1,38 @@
-﻿
+﻿@model IEnumerable<Product>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<table class="table">
+
+    <thead>
+    <tr>
+        <th></th>
+        <th>Название</th>
+        <th>Бренд</th>
+        <th>Секция</th>
+        <th>Изображение</th>
+        <th>Цена</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td><a asp-action="Edit" asp-controller="Catalog" asp-route-id="@product.Id">Ред.</a></td>
+            <td>@product.Name</td>
+            <td>@product.Brand.Name</td>
+            <td>@product.Section.Name</td>
+            <td><img src="~/images/shop/@product.ImageUrl" width="80" alt="@product.Name" /></td>
+            <td>@product.Price</td>
+            <td><a asp-controller="Catalog" asp-action="Delete" asp-route-id="@product.Id">Удал.</a></td>
+
+        </tr>
+    }
+   
+    </tbody>
+
+
+</table>
 

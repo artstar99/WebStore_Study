@@ -20,7 +20,43 @@ namespace WebStore_Study.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var products = productData.GetProducts();
+            return View(products);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var product = productData.GetProductById(id);
+            if (product is null) return NotFound();
+            return View(product);
+        }
+        [HttpPost]
+        public IActionResult Edit(Product productNew)
+        {
+            if (!ModelState.IsValid) return View(productNew);
+
+            productData.Update(productNew);
+
+
+
+            // редактирование
+            // вызов метода из IProductData
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var product = productData.GetProductById(id);
+            if (product is null) return NotFound();
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteConfirm(int id)
+        {
+            productData.Delete(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

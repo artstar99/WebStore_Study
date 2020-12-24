@@ -18,5 +18,8 @@ namespace WebStore_Study.Infrastructure.Interfaces
 
         Product GetProductById(int id);
 
+        void Update(Product productNew);
+        void Delete(int id);
+
     }
 }
