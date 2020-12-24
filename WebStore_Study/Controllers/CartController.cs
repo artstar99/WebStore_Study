@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore_Study.Infrastructure.Interfaces;
+using WebStore_Study.ViewModels;
 
 namespace WebStore_Study.Controllers
 {
@@ -18,7 +19,10 @@ namespace WebStore_Study.Controllers
        
         public IActionResult Index()
         {
-            return View(cartService.TransformFromCart());
+            return View(new CartOrderViewModel
+            {
+                Cart = cartService.TransformFromCart()
+            }); // cartService.TransformFromCart());
         }
 
         public IActionResult AddToCart(int id)
@@ -43,6 +47,10 @@ namespace WebStore_Study.Controllers
             cartService.Clear();
             return RedirectToAction(nameof(Index));
         }
-
+        public IActionResult CheckOut(OrderViewModel model)
+        {
+            
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
