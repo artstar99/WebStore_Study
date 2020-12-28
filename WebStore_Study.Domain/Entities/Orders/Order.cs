@@ -17,6 +17,8 @@ namespace WebStore_Study.Domain.Entities.Orders
         
         [Required]
         public string Adress { get; set; }
+        [Required]
+        public  DateTime Date { get; set; }
 
         public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
 

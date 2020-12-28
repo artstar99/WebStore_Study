@@ -22,8 +22,8 @@ namespace WebStore_Study.Infrastructure
             services.AddTransient<IProductData, SqlProductData>();
             services.AddTransient<WebStore_StudyDbInitializer>();
             services.AddScoped<ICartService, InCookiesCartService>();
-            
-           
+
+            services.AddScoped<IOrderService, SqlOrderService>();
             return services;
         }
 
