@@ -103,7 +103,6 @@ namespace WebStore_Study.Infrastructure.Implementations.InCookies
             var products = productData.GetProducts(new ProductFilter
             {
                 Ids = Cart.Items.Select(item=>item.ProductId).ToArray()
-
             });
             var productViewModels = products.ToView().ToDictionary(p=>p.Id);
             return new CartViewModel
