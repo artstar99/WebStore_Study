@@ -45,12 +45,16 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
             return query;
         }
 
+
         public void Update(Product productNew)
         {
             var product = GetProductById(productNew.Id);
             product.Price = productNew.Price;
             product.Name = productNew.Name;
             product.Order = productNew.Order;
+            product.ImageUrl = productNew.ImageUrl;
+            product.SectionId = productNew.SectionId;
+            product.BrandId = productNew.BrandId;
             dbContext.SaveChanges();
         }
 
@@ -71,5 +75,11 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
             .Include(p => p.Brand)
             .Include(p => p.Section)
             .FirstOrDefault(p => p.Id == id);
+
+        public void Add(Product product)
+        {
+            dbContext.Products.Add(product);
+            dbContext.SaveChanges();
+        }
     }
 }

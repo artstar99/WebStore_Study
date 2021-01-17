@@ -21,5 +21,7 @@ namespace WebStore_Study.Infrastructure.Interfaces
         void Update(Product productNew);
         void Delete(int id);
 
+        void Add(Product product);
+
     }
 }
