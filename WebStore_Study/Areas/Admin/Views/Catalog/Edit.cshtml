@@ -1,0 +1,84 @@
+﻿@model ProductCreateViewModel
+
+@{
+    ViewData["Title"] = "Редактирование";
+}
+
+<h1>View</h1>
+
+<h4>@Model.Product.Name</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div>
+                <img src="~/images/shop/@Model.Product.ImageUrl" width="200"/>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Product.Id" type="hidden" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Product.ImageUrl" type="hidden" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Загрузить новое изображение</label>
+                <input asp-for="Image" type="file" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label">Название</label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Price" class="control-label">Цена</label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+
+                <input asp-for="Product.Order" type="hidden" class="form-control" />
+
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Бренд</label>
+                <select asp-for="Product.BrandId"
+                        asp-items="@Model.Brands.Select(b=> new SelectListItem() { Value=b.Id.ToString(), Text=b.Name,})"
+                        class="form-control">
+                    <option value="@Model.Product.BrandId"></option>
+                </select>
+                <span asp-validation-for="Product.BrandId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.SectionId" class="control-label">Раздел</label>
+                <select asp-for="Product.SectionId"
+                        asp-items="@Model.Sections.Select(s=>new SelectListItem() { Value=s.Id.ToString(), Text=s.Name})"
+                        class="form-control">
+                    <option value="@Model.Product.SectionId"></option>
+                </select>
+                <span asp-validation-for="Product.SectionId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

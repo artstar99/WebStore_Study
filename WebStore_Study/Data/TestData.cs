@@ -52,14 +52,6 @@ namespace WebStore_Study.Data
             }
         };
 
-        public static List<User> Users { get; } = new List<User>()
-        {
-            new User(){LastName="Иванов", FirstName="Иван", Patronymic="Иванович", Age=31},
-            new User(){LastName="Петров", FirstName="Пётр", Patronymic="Петрович", Age=32},
-            new User(){LastName="Сидоров", FirstName="Сидор", Patronymic="Сидорович", Age=33},
-            new User(){LastName="Константинов", FirstName="Константин", Patronymic="Константинович", Age=34}
-        };
-
         const string loremText = @"Lorem ipsum dolor sit amet, consectetur
         adipisicing elit, sed do eiusmod tempor incididunt ut labore
         et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -128,18 +120,18 @@ namespace WebStore_Study.Data
 
         public static List<Product> Products { get; } = new List<Product>()
         {
-            new Product(){Id = 1,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product1.jpg",Order = 0,SectionId = 2,BrandId = 1},
-            new Product(){Id = 2,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product2.jpg",Order = 1,SectionId = 2,BrandId = 1},
-            new Product(){Id = 3,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product3.jpg",Order = 2,SectionId = 2,BrandId = 1},
-            new Product(){Id = 4,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product4.jpg",Order = 3,SectionId = 2,BrandId = 1},
-            new Product(){Id = 5,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product5.jpg",Order = 4,SectionId = 2,BrandId = 2},
-            new Product(){Id = 6,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product6.jpg",Order = 5,SectionId = 2,BrandId = 2},
-            new Product(){Id = 7,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product7.jpg",Order = 6,SectionId = 2,BrandId = 2},
-            new Product(){Id = 8,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product8.jpg",Order = 7,SectionId = 25,BrandId = 2},
-            new Product(){Id = 9,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product9.jpg",Order = 8,SectionId = 25,BrandId = 2},
-            new Product(){Id = 10,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product10.jpg",Order = 9,SectionId = 25,BrandId = 3},
-            new Product(){Id = 11,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product11.jpg",Order = 10,SectionId = 25,BrandId = 3},
-            new Product(){Id = 12,Name = "Easy Polo Black Edition",Price = 1025,ImageUrl = "product12.jpg",Order = 11,SectionId = 25,BrandId = 3},
+            new Product(){Id = 1,Name = "Product-1",Price = 1025,ImageUrl = "product1.jpg",Order = 0,SectionId = 2,BrandId = 1},
+            new Product(){Id = 2,Name = "Product-2",Price = 7864,ImageUrl = "product2.jpg",Order = 1,SectionId = 8,BrandId = 2},
+            new Product(){Id = 3,Name = "Product-3",Price = 456,ImageUrl = "product3.jpg",Order = 2,SectionId = 1,BrandId = 6},
+            new Product(){Id = 4,Name = "Product-4",Price = 345,ImageUrl = "product4.jpg",Order = 3,SectionId = 2,BrandId = 4},
+            new Product(){Id = 5,Name = "Product-5",Price = 554,ImageUrl = "product5.jpg",Order = 4,SectionId = 3,BrandId = 2},
+            new Product(){Id = 6,Name = "Product-6",Price = 7543,ImageUrl = "product6.jpg",Order = 5,SectionId = 2,BrandId = 4},
+            new Product(){Id = 7,Name = "Product-7",Price = 4560,ImageUrl = "product7.jpg",Order = 6,SectionId = 6,BrandId = 2},
+            new Product(){Id = 8,Name = "Product-8",Price = 1005,ImageUrl = "product8.jpg",Order = 7,SectionId = 25,BrandId = 3},
+            new Product(){Id = 9,Name = "Product-9",Price = 1905,ImageUrl = "product9.jpg",Order = 8,SectionId = 25,BrandId = 2},
+            new Product(){Id = 10,Name = "Product-10",Price = 4650,ImageUrl = "product10.jpg",Order = 9,SectionId = 25,BrandId = 1},
+            new Product(){Id = 11,Name = "Product-11",Price = 10001,ImageUrl = "product11.jpg",Order = 10,SectionId = 25,BrandId = 3},
+            new Product(){Id = 12,Name = "Product-12",Price = 10654,ImageUrl = "product12.jpg",Order = 11,SectionId = 25,BrandId = 3},
         };
 
 

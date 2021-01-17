@@ -1,0 +1,23 @@
+﻿@model CartViewModel
+
+@if (!Model.Items.Any())
+{
+    <li><a asp-controller="Cart" asp-action="Index"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+}
+
+else
+{
+    var count = @Model.Items.Count();
+    string text;
+   
+    if (count == 1)
+    {
+        text = "Товар";
+    }
+    else
+    {
+        text = count < 5 ? "Товара" : "Товаров";
+    }
+    <li><a asp-controller="Cart" asp-action="Index"><i class="fa fa-shopping-cart"></i><span style="color: crimson; font-weight: bold">@count @text</span> (@Model.TotalPrice.ToString("C"))</a></li>
+}
+    

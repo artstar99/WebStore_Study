@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System.Linq;
 using WebStore_Study.Domain;
-using WebStore_Study.Infrastructure.Interfaces;
 using WebStore_Study.Domain.Entities;
+using WebStore_Study.Infrastructure.Interfaces;
 using WebStore_Study.Infrastructure.Mapping;
 using WebStore_Study.ViewModels;
 
@@ -18,20 +15,30 @@ namespace WebStore_Study.Infrastructure.Implementations.InCookies
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly string cartName;
 
+        public InCookiesCartService(IProductData productData, IHttpContextAccessor httpContextAccessor)
+        {
+            this.productData = productData;
+            this.httpContextAccessor = httpContextAccessor;
+            var user = httpContextAccessor.HttpContext!.User;
+            var userName = user.Identity!.IsAuthenticated ? $"-{user.Identity.Name!.Replace('@', '&')}" : @"-Anonimous";
+            cartName = $"WebStore.Cart{userName}";
+        }
+        
         private Cart Cart
         {
             get
             {
                 var context = httpContextAccessor.HttpContext;
-                var cookies = context.Response.Cookies;
-                var cartCookie = context.Request.Cookies[cartName];
+                var cookies = context.Response.Cookies; // Кука которая уйдет клиенту
+                var cartCookie = context.Request.Cookies[cartName]; // Запрашиваемая кука у клиента
                 if (cartCookie is null)
                 {
+                    
                     var cart = new Cart();
                     cookies.Append(cartName, JsonConvert.SerializeObject(cart));
                     return cart;
                 }
-                ReplaceCookies(cookies, cartCookie);
+                //ReplaceCookies(cookies, cartCookie);
                 return JsonConvert.DeserializeObject<Cart>(cartCookie);
 
             }
@@ -96,22 +103,12 @@ namespace WebStore_Study.Infrastructure.Implementations.InCookies
             var products = productData.GetProducts(new ProductFilter
             {
                 Ids = Cart.Items.Select(item=>item.ProductId).ToArray()
-
             });
             var productViewModels = products.ToView().ToDictionary(p=>p.Id);
             return new CartViewModel
             {
                 Items = Cart.Items.Select(item => (productViewModels[item.ProductId], item.Quantity))
             };
-        }
-
-        public InCookiesCartService(IProductData productData, IHttpContextAccessor httpContextAccessor)
-        {
-            this.productData = productData;
-            this.httpContextAccessor = httpContextAccessor;
-            var user = httpContextAccessor.HttpContext!.User;
-            var userName = user.Identity!.IsAuthenticated ? $"-{user.Identity.Name.ToString().Replace('@','&')}" : "-Anonimous";
-            cartName = $"WebStore.Cart{userName}";
         }
     }
 }

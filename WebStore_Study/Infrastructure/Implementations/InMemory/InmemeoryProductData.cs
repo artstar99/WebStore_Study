@@ -12,6 +12,16 @@ namespace WebStore_Study.Infrastructure.Implementations.InMemory
     [Obsolete("Класс устарел ибо устарел", true)]
     public class InmemeoryProductData : IProductData
     {
+        public void Add(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Brand GetBrandById(int id)
         {
             throw new NotImplementedException();
@@ -41,5 +51,10 @@ namespace WebStore_Study.Infrastructure.Implementations.InMemory
         }
 
         public IEnumerable<Section> GetSections() => TestData.Sections;
+
+        public void Update(Product productNew)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
