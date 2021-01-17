@@ -110,8 +110,8 @@ namespace WebStore_Study.Infrastructure.Implementations.InCookies
             this.productData = productData;
             this.httpContextAccessor = httpContextAccessor;
             var user = httpContextAccessor.HttpContext!.User;
-            var user_name = user.Identity!.IsAuthenticated ? $"{user.Identity.Name}" : "Anonimous";
-            cartName = $"WebStore.Cart-{user_name}";
+            var userName = user.Identity!.IsAuthenticated ? $"-{user.Identity.Name.ToString().Replace('@','&')}" : "-Anonimous";
+            cartName = $"WebStore.Cart{userName}";
         }
     }
 }
