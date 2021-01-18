@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\WebStore_Study.Domain\WebStore_Study.Domain.csproj" />
+    <ProjectReference Include="..\WebStore_Study.DAL\WebStore_Study.DAL.csproj" />
+    <ProjectReference Include="..\WebStore_Study.Interfaces\WebStore_Study.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
