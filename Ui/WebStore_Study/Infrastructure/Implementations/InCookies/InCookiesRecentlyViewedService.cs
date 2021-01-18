@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
-using WebStore_Study.ViewModels;
+using WebStore_Study.Domain.ViewModels;
 
 namespace WebStore_Study.Infrastructure.Implementations.InCookies
 {
     public class InCookiesRecentlyViewedService
     {
         private readonly IHttpContextAccessor contextAccessor;
-        private string cookieName;
+        private readonly string cookieName;
 
 
         public InCookiesRecentlyViewedService(IHttpContextAccessor contextAccessor)

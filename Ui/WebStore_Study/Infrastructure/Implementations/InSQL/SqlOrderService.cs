@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Domain.Entities.Orders;
-using WebStore_Study.Infrastructure.Interfaces;
-using WebStore_Study.ViewModels;
+using WebStore_Study.Domain.ViewModels;
+using WebStore_Study.Interfaces.Services;
 
 namespace WebStore_Study.Infrastructure.Implementations.InSQL
 {

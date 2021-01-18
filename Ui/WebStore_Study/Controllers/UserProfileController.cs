@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using WebStore_Study.Infrastructure.Interfaces;
-using WebStore_Study.ViewModels;
-using WebStore_Study.Domain.Entities;
+using WebStore_Study.Domain.ViewModels;
+using WebStore_Study.Interfaces.Services;
 
 namespace WebStore_Study.Controllers
 {

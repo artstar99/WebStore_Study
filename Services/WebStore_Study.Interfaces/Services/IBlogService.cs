@@ -2,7 +2,7 @@
 using WebStore_Study.Domain;
 using WebStore_Study.Domain.Entities;
 
-namespace WebStore_Study.Infrastructure.Interfaces
+namespace WebStore_Study.Interfaces.Services
 {
     public interface IBlogService
     {

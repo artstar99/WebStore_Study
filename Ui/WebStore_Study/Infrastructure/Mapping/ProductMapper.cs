@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using WebStore_Study.Domain.Entities;
-using WebStore_Study.ViewModels;
+using WebStore_Study.Domain.ViewModels;
 
 namespace WebStore_Study.Infrastructure.Mapping
 {

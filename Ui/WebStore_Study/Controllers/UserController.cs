@@ -1,21 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using WebStore_Study.Data;
 using WebStore_Study.Domain.Entities;
-using WebStore_Study.Infrastructure.Interfaces;
-using WebStore_Study.ViewModels;
+using WebStore_Study.Interfaces.Services;
+using WebStore_Study.Domain.ViewModels;
 
 namespace WebStore_Study.Controllers
 {
     [Authorize]
     public class UserController : Controller
     {
-        IUsersData UsersDataService;
+        readonly IUsersData UsersDataService;
         public UserController(IUsersData UsersDataService)
         {
             this.UsersDataService = UsersDataService;

@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using WebStore_Study.Infrastructure.Interfaces;
-using WebStore_Study.ViewModels;
+using WebStore_Study.Domain.ViewModels;
+using WebStore_Study.Interfaces.Services;
 
 namespace WebStore_Study.Components
-{   
+{
     [ViewComponent]
     public class SectionsViewComponent:ViewComponent
     {

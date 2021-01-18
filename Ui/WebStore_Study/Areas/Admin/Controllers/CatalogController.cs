@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using WebStore_Study.Areas.Admin.ViewModels;
 using WebStore_Study.Domain.Entities;
-using WebStore_Study.Infrastructure.Interfaces;
+using WebStore_Study.Interfaces.Services;
 
 namespace WebStore_Study.Areas.Admin.Controllers
 {
