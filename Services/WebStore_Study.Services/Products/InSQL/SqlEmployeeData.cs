@@ -5,7 +5,7 @@ using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
 
-namespace WebStore_Study.Infrastructure.Implementations.InSQL
+namespace WebStore_Study.Services.Products.InSQL
 {
     public class SqlEmployeeData : IUsersData
     {

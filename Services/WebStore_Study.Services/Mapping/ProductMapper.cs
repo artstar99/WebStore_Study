@@ -3,11 +3,11 @@ using System.Linq;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Domain.ViewModels;
 
-namespace WebStore_Study.Infrastructure.Mapping
+namespace WebStore_Study.Services.Mapping
 {
     public static class ProductMapper
     {
-        public static ProductViewModel ToView(this Product p) => new()
+        public static ProductViewModel ToView(this Product p) => new ProductViewModel()
         {
             Id = p.Id,
             Order = p.Order,

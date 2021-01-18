@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore_Study.Domain.Entities;
 
-namespace WebStore_Study.Data
+namespace WebStore_Study.Services.Data
 {
     public static class TestData
     {
@@ -38,7 +38,7 @@ namespace WebStore_Study.Data
                 MainText=loremText,
                 CreationTime= new DateTime(2013, 12, 5, 13, 33, 0),
                 Tags=new List<string>(){"Pink", "T-Shirt", "Girls"},
-                ImageName="blog-three.jpg" 
+                ImageName="blog-three.jpg"
             },
             new Blog
             {
@@ -48,7 +48,7 @@ namespace WebStore_Study.Data
                 MainText=loremText,
                 CreationTime= new DateTime(2013, 12, 5, 13, 33, 0),
                 Tags=new List<string>(){"Pink", "T-Shirt", "Girls"},
-                ImageName="blog-one.jpg" 
+                ImageName="blog-one.jpg"
             }
         };
 

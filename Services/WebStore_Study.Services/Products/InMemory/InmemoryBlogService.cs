@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using WebStore_Study.Data;
 using WebStore_Study.Domain;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
+using WebStore_Study.Services.Data;
 
-namespace WebStore_Study.Infrastructure.Implementations.InMemory
+namespace WebStore_Study.Services.Products.InMemory
 {
     [Obsolete("Класс устарел", true)]
     public class InmemoryBlogService : IBlogService

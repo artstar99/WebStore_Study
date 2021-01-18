@@ -9,7 +9,7 @@ using WebStore_Study.Domain.Entities;
 
 // ReSharper disable All
 
-namespace WebStore_Study.Data
+namespace WebStore_Study.Services.Data
 {
     public class WebStore_StudyDbInitializer
     {
@@ -98,7 +98,7 @@ namespace WebStore_Study.Data
                 dbContext.SaveChanges();
                 dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Blogs] OFF");
                 dbContext.Database.CommitTransaction();
-            }   
+            }
         }
 
         //private void InitializeUsers()
@@ -164,7 +164,7 @@ namespace WebStore_Study.Data
                     await roleManager.CreateAsync(new Role { Name = roleName });
                 }
             }
-            
+
             await CheckRole(Role.Administrator);
             await CheckRole(Role.User);
 
@@ -191,9 +191,9 @@ namespace WebStore_Study.Data
                         $"Ошибка при создании учетной записи администратора{string.Join(',', errors)}");
                 }
 
-               
+
             }
-           
+
         }
 
         private async Task SetAdminRole(User user)

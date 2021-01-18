@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using WebStore_Study.DAL.Context;
-using WebStore_Study.Data;
 using WebStore_Study.Domain.Entities;
-using WebStore_Study.Infrastructure;
+using WebStore_Study.Services;
+using WebStore_Study.Services.Data;
 
 namespace WebStore_Study
 {

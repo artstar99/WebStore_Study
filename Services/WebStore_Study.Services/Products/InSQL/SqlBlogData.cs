@@ -6,7 +6,7 @@ using WebStore_Study.Domain;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
 
-namespace WebStore_Study.Infrastructure.Implementations.InSQL
+namespace WebStore_Study.Services.Products.InSQL
 {
     public class SqlBlogData : IBlogService
     {
@@ -50,8 +50,8 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
             if (filter.CurrentPage != null)
             {
                 var query = dbContext.Blogs
-                    .OrderByDescending(blog=>blog.Id)
-                    .Skip(filter.BlogsPerPage * (int) (filter.CurrentPage - 1))
+                    .OrderByDescending(blog => blog.Id)
+                    .Skip(filter.BlogsPerPage * (int)(filter.CurrentPage - 1))
                     .Take(filter.BlogsPerPage);
                 return query;
             }

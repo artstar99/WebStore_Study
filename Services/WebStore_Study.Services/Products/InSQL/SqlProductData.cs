@@ -7,7 +7,7 @@ using WebStore_Study.Domain;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
 
-namespace WebStore_Study.Infrastructure.Implementations.InSQL
+namespace WebStore_Study.Services.Products.InSQL
 {
     public class SqlProductData : IProductData
     {
@@ -17,17 +17,17 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
         {
             this.dbContext = dbContext;
         }
-        public IEnumerable<Brand> GetBrands() => dbContext.Brands.Include(b=>b.Products);
+        public IEnumerable<Brand> GetBrands() => dbContext.Brands.Include(b => b.Products);
 
         public IEnumerable<Section> GetSections() => dbContext.Sections;
 
         public IEnumerable<Product> GetProducts(ProductFilter filter = null)
         {
             IQueryable<Product> query = dbContext.Products
-                .Include(p=>p.Brand)
-                .Include(p=>p.Section);
-            
-            if (filter?.Ids!=null && filter?.Ids.Length >0)
+                .Include(p => p.Brand)
+                .Include(p => p.Section);
+
+            if (filter?.Ids != null && filter?.Ids.Length > 0)
             {
                 query = query.Where(prod => filter.Ids.Contains(prod.Id));
             }
@@ -38,9 +38,9 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
                 if (filter?.SectionId != null)
                     query = query.Where(p => p.SectionId == filter.SectionId);
             }
-            
-           
-            
+
+
+
             return query;
         }
 

@@ -10,9 +10,9 @@ using WebStore_Study.Domain.Entities.Orders;
 using WebStore_Study.Domain.ViewModels;
 using WebStore_Study.Interfaces.Services;
 
-namespace WebStore_Study.Infrastructure.Implementations.InSQL
+namespace WebStore_Study.Services.Products.InSQL
 {
-    public class SqlOrderService:IOrderService
+    public class SqlOrderService : IOrderService
     {
         private readonly WebStore_StudyDb context;
         private readonly UserManager<User> userManager;
@@ -26,7 +26,7 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
         public async Task<Order> CreateOrder(string userName, CartViewModel cart, OrderViewModel orderModel)
         {
             var user = await userManager.FindByNameAsync(userName);
-            if (user==null)
+            if (user == null)
                 throw new InvalidOperationException($"Пользователь {user} не найден в БД");
 
             await using var transaction = await context.Database.BeginTransactionAsync();
@@ -43,7 +43,7 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
             foreach (var (productModel, quantity) in cart.Items)
             {
                 var product = await context.Products.FindAsync(productModel.Id);
-                if(product is null)
+                if (product is null)
                     continue;
                 var orderItem = new OrderItem
                 {
@@ -71,11 +71,11 @@ namespace WebStore_Study.Infrastructure.Implementations.InSQL
 
         public async Task<IEnumerable<Order>> GetUserOrders(string userName)
         {
-           var orders= await context.Orders
-                .Include(order => order.User)
-                .Include(order => order.Items)
-                .Where(order => order.User.UserName == userName).ToArrayAsync();
-           return orders;
+            var orders = await context.Orders
+                 .Include(order => order.User)
+                 .Include(order => order.Items)
+                 .Where(order => order.User.UserName == userName).ToArrayAsync();
+            return orders;
         }
     }
 }

@@ -4,12 +4,12 @@ using System.Linq;
 using WebStore_Study.Domain;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Domain.ViewModels;
-using WebStore_Study.Infrastructure.Mapping;
 using WebStore_Study.Interfaces.Services;
+using WebStore_Study.Services.Mapping;
 
-namespace WebStore_Study.Infrastructure.Implementations.InCookies
+namespace WebStore_Study.Services.Products.InCookies
 {
-    public class InCookiesCartService:ICartService
+    public class InCookiesCartService : ICartService
     {
         private readonly IProductData productData;
         private readonly IHttpContextAccessor httpContextAccessor;
@@ -23,7 +23,7 @@ namespace WebStore_Study.Infrastructure.Implementations.InCookies
             var userName = user.Identity!.IsAuthenticated ? $"-{user.Identity.Name!.Replace('@', '&')}" : @"-Anonimous";
             cartName = $"WebStore.Cart{userName}";
         }
-        
+
         private Cart Cart
         {
             get
@@ -33,7 +33,7 @@ namespace WebStore_Study.Infrastructure.Implementations.InCookies
                 var cartCookie = context.Request.Cookies[cartName]; // Запрашиваемая кука у клиента
                 if (cartCookie is null)
                 {
-                    
+
                     var cart = new Cart();
                     cookies.Append(cartName, JsonConvert.SerializeObject(cart));
                     return cart;
@@ -57,7 +57,7 @@ namespace WebStore_Study.Infrastructure.Implementations.InCookies
             var cart = Cart;
             var item = cart.Items.FirstOrDefault(i => i.ProductId == id);
             if (item is null)
-                cart.Items.Add(new CartItem {ProductId = id, Quantity = 1});
+                cart.Items.Add(new CartItem { ProductId = id, Quantity = 1 });
             else
                 item.Quantity++;
             Cart = cart;
@@ -75,8 +75,8 @@ namespace WebStore_Study.Infrastructure.Implementations.InCookies
 
             if (item.Quantity == 0)
                 cart.Items.Remove(item);
-            
-           
+
+
             Cart = cart;
         }
 
@@ -102,9 +102,9 @@ namespace WebStore_Study.Infrastructure.Implementations.InCookies
         {
             var products = productData.GetProducts(new ProductFilter
             {
-                Ids = Cart.Items.Select(item=>item.ProductId).ToArray()
+                Ids = Cart.Items.Select(item => item.ProductId).ToArray()
             });
-            var productViewModels = products.ToView().ToDictionary(p=>p.Id);
+            var productViewModels = products.ToView().ToDictionary(p => p.Id);
             return new CartViewModel
             {
                 Items = Cart.Items.Select(item => (productViewModels[item.ProductId], item.Quantity))

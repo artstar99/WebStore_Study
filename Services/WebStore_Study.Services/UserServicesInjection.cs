@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using WebStore_Study.Data;
-using WebStore_Study.Infrastructure.Implementations.InCookies;
-using WebStore_Study.Infrastructure.Implementations.InSQL;
 using WebStore_Study.Interfaces.Services;
+using WebStore_Study.Services.Data;
+using WebStore_Study.Services.Products.InCookies;
+using WebStore_Study.Services.Products.InSQL;
 
-namespace WebStore_Study.Infrastructure
+namespace WebStore_Study.Services
 {
     public static class UserServicesInjection
     {

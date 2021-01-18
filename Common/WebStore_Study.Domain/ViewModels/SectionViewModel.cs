@@ -11,6 +11,6 @@ namespace WebStore_Study.Domain.ViewModels
 
         public List<SectionViewModel> ChildSection { get; set; } = new List<SectionViewModel>();
         
-        public SectionViewModel? ParentSection { get; set; }
+        public SectionViewModel ParentSection { get; set; }
     }
 }

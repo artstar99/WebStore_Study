@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using WebStore_Study.Domain.ViewModels;
 
-namespace WebStore_Study.Infrastructure.Implementations.InCookies
+namespace WebStore_Study.Services.Products.InCookies
 {
     public class InCookiesRecentlyViewedService
     {
@@ -26,7 +26,7 @@ namespace WebStore_Study.Infrastructure.Implementations.InCookies
                 var cookies = context.Request.Cookies;
                 if (cookies.ContainsKey(cookieName))
                 {
-                    
+
                 }
                 return null;
 
