@@ -17,15 +17,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebStore_Study.DAL\WebStore_Study.DAL.csproj" />
-    <ProjectReference Include="..\WebStore_Study.Domain\WebStore_Study.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Areas\Admin\Components\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\WebStore_Study.Domain\WebStore_Study.Domain.csproj" />
+    <ProjectReference Include="..\..\Services\WebStore_Study.DAL\WebStore_Study.DAL.csproj" />
   </ItemGroup>
 
 </Project>

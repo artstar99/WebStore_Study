@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WebStore_Study.Domain.Entities;
 
 
-namespace WebStore_Study.ViewModels
+namespace WebStore_Study.Domain.ViewModels
 {
     public class BlogsViewModel
     {

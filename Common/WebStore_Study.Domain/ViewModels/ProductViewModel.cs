@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using WebStore_Study.Domain.Entities;
+﻿using WebStore_Study.Domain.Entities;
 using WebStore_Study.Domain.Entities.Base.Interfaces;
 
-namespace WebStore_Study.ViewModels
+namespace WebStore_Study.Domain.ViewModels
 {
     public class ProductViewModel : INamedEntity, IOrderedEntity
     {

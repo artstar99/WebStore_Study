@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebStore_Study.Domain.Entities;
+﻿using System.Collections.Generic;
 using WebStore_Study.Domain.Entities.Base.Interfaces;
 
-namespace WebStore_Study.ViewModels
+namespace WebStore_Study.Domain.ViewModels
 {
     public class SectionViewModel : INamedEntity, IOrderedEntity
     {
@@ -14,7 +10,7 @@ namespace WebStore_Study.ViewModels
         public string Name { get; set; }
 
         public List<SectionViewModel> ChildSection { get; set; } = new List<SectionViewModel>();
-
+        
         public SectionViewModel? ParentSection { get; set; }
     }
 }

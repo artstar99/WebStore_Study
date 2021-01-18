@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebStore_Study.ViewModels
+namespace WebStore_Study.Domain.ViewModels
 {
     public class LoginViewModel
     {
