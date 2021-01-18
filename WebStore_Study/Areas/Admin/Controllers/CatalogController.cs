@@ -29,6 +29,8 @@ namespace WebStore_Study.Areas.Admin.Controllers
             return View(products);
         }
 
+
+
         public IActionResult Edit(int id)
         {
             var product = productData.GetProductById(id);
