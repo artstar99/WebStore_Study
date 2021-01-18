@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,7 +12,7 @@ namespace WebStore_Study.Clients.Values
 {
     public class ValuesClient : BaseClient, IValuesService
     {
-        public ValuesClient(HttpClient client) : base(client, "api/values") { }
+        public ValuesClient(IConfiguration configuration) : base(configuration, "api/values") { }
         public IEnumerable<string> Get()
         {
             var response = Http.GetAsync(Address).Result;
