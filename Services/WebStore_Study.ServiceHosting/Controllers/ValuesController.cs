@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using WebStore_Study.Services.Contracts.V1;
 
 namespace WebStore_Study.ServiceHosting.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
@@ -15,7 +16,8 @@ namespace WebStore_Study.ServiceHosting.Controllers
             .Select(i => $"Value{i:00}")
             .ToList();
         // GET: api/<ValuesController>
-        [HttpGet]
+        
+        [HttpGet(ApiRoutes.Values.Get)]
         public IEnumerable<string> Get()
         {
             return values;
