@@ -8,10 +8,11 @@ using WebStore_Study.Domain;
 using WebStore_Study.Domain.Dto.Products;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
+using WebStore_Study.Services.Contracts.V1;
 
 namespace WebStore_Study.ServiceHosting.Controllers
 {
-    [Route("api/products")]
+    [Route(ApiRoutes.Products)]
     [ApiController]
     public class ProductsApiController : ControllerBase, IProductData
     {

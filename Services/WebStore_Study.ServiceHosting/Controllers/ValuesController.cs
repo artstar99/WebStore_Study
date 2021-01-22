@@ -6,7 +6,7 @@ using WebStore_Study.Services.Contracts.V1;
 
 namespace WebStore_Study.ServiceHosting.Controllers
 {
-    //[Route("api/[controller]")]
+    [Route(ApiRoutes.Values)]
     [ApiController]
     public class ValuesController : ControllerBase
     {
@@ -17,7 +17,7 @@ namespace WebStore_Study.ServiceHosting.Controllers
             .ToList();
         // GET: api/<ValuesController>
         
-        [HttpGet(ApiRoutes.Values.Get)]
+        [HttpGet(ApiRoutes.Values)]
         public IEnumerable<string> Get()
         {
             return values;
@@ -37,7 +37,6 @@ namespace WebStore_Study.ServiceHosting.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
-        [HttpPost("{add}")]
         public ActionResult Post([FromBody] string value)
         {
             values.Add(value);
@@ -46,7 +45,6 @@ namespace WebStore_Study.ServiceHosting.Controllers
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        [HttpPut("{edit}/{id}")]
         public ActionResult Put(int id, [FromBody] string value)
         {
             if (id < 0)
@@ -59,7 +57,6 @@ namespace WebStore_Study.ServiceHosting.Controllers
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
-        [HttpDelete("{delete}/{id}")]
         public ActionResult Delete(int id)
         {
             if (id < 0)

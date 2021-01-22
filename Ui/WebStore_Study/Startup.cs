@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using WebStore_Study.Clients.Values;
+using WebStore_Study.Clients.Products;
 using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
@@ -34,7 +35,7 @@ namespace WebStore_Study
 
             services.AddTransient<IUsersData, SqlEmployeeData>();
             services.AddTransient<IBlogService, SqlBlogData>();
-            services.AddTransient<IProductData, SqlProductData>();
+            services.AddTransient<IProductData, ProductsClient>();
             services.AddTransient<WebStore_StudyDbInitializer>();
             services.AddScoped<ICartService, InCookiesCartService>();
 
