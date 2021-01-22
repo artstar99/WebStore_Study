@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using WebStore_Study.Interfaces.Services;
+using WebStore_Study.Interfaces.TestApi;
+using WebStore_Study.Clients.Values;
 using WebStore_Study.Services.Data;
 using WebStore_Study.Services.Products.InCookies;
 using WebStore_Study.Services.Products.InSQL;
@@ -17,6 +19,9 @@ namespace WebStore_Study.Services
             services.AddScoped<ICartService, InCookiesCartService>();
 
             services.AddScoped<IOrderService, SqlOrderService>();
+            services.AddScoped<IValuesService, ValuesClient>();
+
+            
             return services;
         }
 

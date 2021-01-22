@@ -29,6 +29,9 @@ namespace WebStore_Study
                     .AddDefaultTokenProviders();
             services.AddDbContext<WebStore_StudyDb>(opt => opt.UseSqlServer(configuration.GetConnectionString("Default")));
 
+            services.AddHttpClient();
+
+
             services.Configure<IdentityOptions>(opt =>
             {
 #if DEBUG

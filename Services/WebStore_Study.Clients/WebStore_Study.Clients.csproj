@@ -5,9 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Common\WebStore_Study.Domain\WebStore_Study.Domain.csproj" />
-    <ProjectReference Include="..\WebStore_Study.Clients\WebStore_Study.Clients.csproj" />
-    <ProjectReference Include="..\WebStore_Study.DAL\WebStore_Study.DAL.csproj" />
     <ProjectReference Include="..\WebStore_Study.Interfaces\WebStore_Study.Interfaces.csproj" />
   </ItemGroup>
 
