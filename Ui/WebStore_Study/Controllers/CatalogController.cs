@@ -19,7 +19,7 @@ namespace WebStore_Study.Controllers
         public IActionResult Shop(int? brandId, int? sectionId)
         {
             var filter = new ProductFilter { BrandId=brandId, SectionId=sectionId};
-            var products = productData.GetProducts(filter);
+            var products = productData.GetProducts(filter).FromDto();
             return View(new CatalogViewModel 
             {
                 SectionId=sectionId,
@@ -32,12 +32,9 @@ namespace WebStore_Study.Controllers
 
         public IActionResult Details(int id)
         {
-            var product = productData.GetProductById(id);
+            var product = productData.GetProductById(id).FromDto();
             if (product is null)
                 return NotFound();
-            
-            
-            
             return View(product.ToView());
         }
     }

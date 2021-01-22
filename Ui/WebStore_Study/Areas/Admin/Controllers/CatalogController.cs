@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using WebStore_Study.Areas.Admin.ViewModels;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
+using WebStore_Study.Services.Mapping;
 
 namespace WebStore_Study.Areas.Admin.Controllers
 {
@@ -25,7 +26,7 @@ namespace WebStore_Study.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            var products = productData.GetProducts();
+            var products = productData.GetProducts().FromDto();
             return View(products);
         }
 
@@ -33,13 +34,13 @@ namespace WebStore_Study.Areas.Admin.Controllers
 
         public IActionResult Edit(int id)
         {
-            var product = productData.GetProductById(id);
+            var product = productData.GetProductById(id).FromDto();
             if (product is null) return NotFound();
 
             var model = new ProductCreateViewModel()
             {
-                Brands = productData.GetBrands(),
-                Sections = productData.GetSections(),
+                Brands = productData.GetBrands().FromDto(),
+                Sections = productData.GetSections().FromDto(),
                 Product = product,
             };
             return View(model);
@@ -78,7 +79,7 @@ namespace WebStore_Study.Areas.Admin.Controllers
                 await model.Image.CopyToAsync(fileStream);
             }
             var product = model.Product;
-            productData.Update(product);
+            productData.Update(product.ToDto());
             return RedirectToAction(nameof(Index));
         }
 
@@ -86,7 +87,7 @@ namespace WebStore_Study.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
-            var product = productData.GetProductById(id);
+            var product = productData.GetProductById(id).FromDto();
             if (product is null) return NotFound();
             return View(product);
         }
@@ -123,8 +124,8 @@ namespace WebStore_Study.Areas.Admin.Controllers
         {
             var model = new ProductCreateViewModel
             {
-                Brands = productData.GetBrands().ToList(),
-                Sections = productData.GetSections().ToList(),
+                Brands = productData.GetBrands().FromDto(),
+                Sections = productData.GetSections().FromDto(),
                 Product = new Product { Order = 1, }
             };
 
@@ -151,7 +152,7 @@ namespace WebStore_Study.Areas.Admin.Controllers
                 await using var fileStream = new FileStream(appEnvironment.WebRootPath + path, FileMode.Create);
                 await model.Image.CopyToAsync(fileStream);
             }
-            productData.Add(model.Product);
+            productData.Add(model.Product.ToDto());
             return RedirectToAction(nameof(Index));
         }
     }

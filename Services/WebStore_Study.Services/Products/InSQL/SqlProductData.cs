@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain;
+using WebStore_Study.Domain.Dto.Products;
 using WebStore_Study.Domain.Entities;
+using WebStore_Study.Domain.Entities.Base;
 using WebStore_Study.Interfaces.Services;
+using WebStore_Study.Services.Mapping;
 
 namespace WebStore_Study.Services.Products.InSQL
 {
@@ -17,11 +20,14 @@ namespace WebStore_Study.Services.Products.InSQL
         {
             this.dbContext = dbContext;
         }
-        public IEnumerable<Brand> GetBrands() => dbContext.Brands.Include(b => b.Products);
+        public IEnumerable<BrandDto> GetBrands() => dbContext.Brands
+                .Include(b => b.Products)
+                .AsEnumerable()
+                .ToDto();
 
-        public IEnumerable<Section> GetSections() => dbContext.Sections;
+        public IEnumerable<SectionDto> GetSections() => dbContext.Sections.ToDto();
 
-        public IEnumerable<Product> GetProducts(ProductFilter filter = null)
+        public IEnumerable<ProductDto> GetProducts(ProductFilter filter = null)
         {
             IQueryable<Product> query = dbContext.Products
                 .Include(p => p.Brand)
@@ -41,19 +47,21 @@ namespace WebStore_Study.Services.Products.InSQL
 
 
 
-            return query;
+            return query.AsEnumerable().ToDto();
         }
 
 
-        public void Update(Product productNew)
+        public void Update(ProductDto productNew)
         {
             var product = GetProductById(productNew.Id);
-            product.Price = productNew.Price;
-            product.Name = productNew.Name;
-            product.Order = productNew.Order;
-            product.ImageUrl = productNew.ImageUrl;
-            product.SectionId = productNew.SectionId;
-            product.BrandId = productNew.BrandId;
+            product = productNew;
+            dbContext.Entry(product).State = EntityState.Modified;
+            //product.Price = productNew.Price;
+            //product.Name = productNew.Name;
+            //product.Order = productNew.Order;
+            //product.ImageUrl = productNew.ImageUrl;
+            //product.SectionId = productNew.SectionId;
+            //product.BrandId = productNew.BrandId;
             dbContext.SaveChanges();
         }
 
@@ -64,20 +72,20 @@ namespace WebStore_Study.Services.Products.InSQL
             dbContext.SaveChanges();
         }
 
-        public Section GetSectionById(int id) =>
-            dbContext.Sections.Include(s => s.Products).FirstOrDefault(s => s.Id == id);
+        public SectionDto GetSectionById(int id) =>
+            dbContext.Sections.Include(s => s.Products).FirstOrDefault(s => s.Id == id).ToDto();
 
-        public Brand GetBrandById(int id) =>
-            dbContext.Brands.Include(brand => brand.Products).FirstOrDefault(b => b.Id == id);
+        public BrandDto GetBrandById(int id) =>
+            dbContext.Brands.Include(brand => brand.Products).FirstOrDefault(b => b.Id == id).ToDto();
 
-        public Product GetProductById(int id) => dbContext.Products
+        public ProductDto GetProductById(int id) => dbContext.Products
             .Include(p => p.Brand)
             .Include(p => p.Section)
-            .FirstOrDefault(p => p.Id == id);
+            .FirstOrDefault(p => p.Id == id).ToDto();
 
-        public void Add(Product product)
+        public void Add(ProductDto product)
         {
-            dbContext.Products.Add(product);
+            dbContext.Products.Add(product.FromDto());
             dbContext.SaveChanges();
         }
     }
