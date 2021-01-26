@@ -9,7 +9,7 @@ using WebStore_Study.Domain.Entities.Orders;
 
 namespace WebStore_Study.Services.Mapping
 {
-    public static class OrdersMapper
+    public static class OrderMapper
     {
         public static OrderItemDto ToDto(this OrderItem item) => item is null
             ? null

@@ -26,7 +26,7 @@ namespace WebStore_Study.ServiceHosting.Controllers
             this.logger = logger;
         }
 
-        [HttpPost]
+        [HttpPost("{UserName}")]
         public async Task<OrderDto> CreateOrder(string userName, [FromBody]CreateOrderModel orderModel)
         {
             logger.LogInformation($"Формирование заказа для пользователя{userName}");
@@ -40,7 +40,7 @@ namespace WebStore_Study.ServiceHosting.Controllers
             return await orderService.GetOrderById(id);
         }
 
-        [HttpGet]
+        [HttpGet("user/{UserName}")]
         public async Task<IEnumerable<OrderDto>> GetUserOrders(string UserName)
         {
             return await orderService.GetUserOrders(UserName);

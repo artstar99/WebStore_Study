@@ -6,13 +6,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using WebStore_Study.Clients.Values;
+using WebStore_Study.Clients.Orders;
 using WebStore_Study.Clients.Products;
+using WebStore_Study.Clients.Values;
 using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
 using WebStore_Study.Interfaces.TestApi;
-using WebStore_Study.Services;
 using WebStore_Study.Services.Data;
 using WebStore_Study.Services.Products.InCookies;
 using WebStore_Study.Services.Products.InSQL;
@@ -39,7 +39,7 @@ namespace WebStore_Study
             services.AddTransient<WebStore_StudyDbInitializer>();
             services.AddScoped<ICartService, InCookiesCartService>();
 
-            services.AddScoped<IOrderService, SqlOrderService>();
+            services.AddScoped<IOrderService, OrdersClient>();
             services.AddScoped<IValuesService, ValuesClient>();
 
             //
