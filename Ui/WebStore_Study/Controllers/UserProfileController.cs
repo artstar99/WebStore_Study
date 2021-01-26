@@ -39,7 +39,7 @@ namespace WebStore_Study.Controllers
             return View(orders.Select(order => new UserOrderViewModel
             {
                 Id = order.Id,
-                Address = order.Adress,
+                Address = order.Address,
                 Name = order.Name,
                 TotalSum = order.Items.Sum(item => item.Price * item.Quantity)
 

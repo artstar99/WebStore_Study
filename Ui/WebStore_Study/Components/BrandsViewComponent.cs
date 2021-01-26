@@ -26,7 +26,7 @@ namespace WebStore_Study.Components
                 Id = b.Id,
                 Name = b.Name,
                 Order = b.Order,
-                ProductsCount=b.Products.Count(),
+                ProductsCount=b.ProductsCount,
             });
         
     }
