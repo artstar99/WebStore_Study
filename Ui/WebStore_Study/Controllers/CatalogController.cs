@@ -7,7 +7,6 @@ using WebStore_Study.Services.Mapping;
 
 namespace WebStore_Study.Controllers
 {
-
     public class CatalogController : Controller
     {
         private readonly IProductData productData;
@@ -16,18 +15,19 @@ namespace WebStore_Study.Controllers
         {
             this.productData = productData;
         }
+
         public IActionResult Shop(int? brandId, int? sectionId)
         {
-            var filter = new ProductFilter { BrandId=brandId, SectionId=sectionId};
+            var filter = new ProductFilter {BrandId = brandId, SectionId = sectionId};
             var products = productData.GetProducts(filter).FromDto();
-            return View(new CatalogViewModel 
+            return View(new CatalogViewModel
             {
-                SectionId=sectionId,
-                BrandId=brandId,
-                Products= products
-                .OrderBy(p=>p.Order)
-                .ToView()
-            } );
+                SectionId = sectionId,
+                BrandId = brandId,
+                Products = products
+                    .OrderBy(p => p.Order)
+                    .ToView()
+            });
         }
 
         public IActionResult Details(int id)

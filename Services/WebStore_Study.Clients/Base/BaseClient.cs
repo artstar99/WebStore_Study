@@ -40,6 +40,7 @@ namespace WebStore_Study.Clients.Base
         protected HttpResponseMessage Post<T>(string url, T item) => PostAsync(url, item).Result;
         protected async Task<HttpResponseMessage> PostAsync<T>(string url, T item)
         {
+            
             var response = await Http.PostAsJsonAsync(url, item);
             return response.EnsureSuccessStatusCode();
         }

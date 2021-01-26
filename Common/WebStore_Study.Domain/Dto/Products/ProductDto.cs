@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace WebStore_Study.Domain.Dto.Products
 {
-    public record BrandDto(int Id, string Name, int Order);
+    public record BrandDto(int Id, string Name, int Order, int ProductsCount);
 
-    public record SectionDto(int Id, string Name, int Order, int? ParentId);
+    public record SectionDto(int Id, string Name, int Order, int? ParentId, int? ProductsCount);
 
-    public record ProductDto(
-        int Id, 
-        string Name,
-        int Order, 
-        decimal Price, 
-        string ImageUrl, 
-        BrandDto Brand,
+    public record ProductDto(int Id, string Name, int Order, decimal Price, string ImageUrl, BrandDto Brand,
         SectionDto Section);
+
+
 }

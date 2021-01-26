@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using WebStore_Study.Areas.Admin.ViewModels;
+using WebStore_Study.Domain;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
 using WebStore_Study.Services.Mapping;
@@ -57,7 +58,7 @@ namespace WebStore_Study.Areas.Admin.Controllers
                 string newImagepath = "/images/shop/" + fileName;
 
                 //Удаляем старое изображение
-                if (model.Product.ImageUrl!="noimage") 
+                if (model.Product.ImageUrl != "noimage")
                 {
                     string oldImagePath = "/images/shop/" + model.Product.ImageUrl;
                     if (System.IO.File.Exists(appEnvironment.WebRootPath + oldImagePath))
@@ -78,7 +79,16 @@ namespace WebStore_Study.Areas.Admin.Controllers
                 await using var fileStream = new FileStream(appEnvironment.WebRootPath + newImagepath, FileMode.Create);
                 await model.Image.CopyToAsync(fileStream);
             }
+
             var product = model.Product;
+            product.Brand = productData.GetBrandById(model.Product.BrandId!.Value).FromDto();
+            product.Section = productData.GetSectionById(model.Product.SectionId).FromDto();
+
+            product.Brand.Products = productData.GetProducts(new ProductFilter() {BrandId = product.BrandId}).FromDto().ToList();
+            product.Section.Products = productData.GetProducts(new ProductFilter() {SectionId = product.SectionId})
+                .FromDto().ToList();
+            
+            
             productData.Update(product.ToDto());
             return RedirectToAction(nameof(Index));
         }
@@ -152,6 +162,20 @@ namespace WebStore_Study.Areas.Admin.Controllers
                 await using var fileStream = new FileStream(appEnvironment.WebRootPath + path, FileMode.Create);
                 await model.Image.CopyToAsync(fileStream);
             }
+
+            var brand = productData.GetBrandById(model.Product.BrandId!.Value);
+            var section = productData.GetSectionById(model.Product.SectionId);
+            model.Product.Brand = brand.FromDto();
+            model.Product.Section = section.FromDto();
+            model.Product.Brand.Products = productData.GetProducts()
+                    .FromDto()
+                    .Where(x => x.BrandId == brand.Id)
+                    .ToList();
+            model.Product.Section.Products = productData.GetProducts()
+                    .FromDto()
+                    .Where(prod => prod.SectionId == section.Id)
+                    .ToList();
+
             productData.Add(model.Product.ToDto());
             return RedirectToAction(nameof(Index));
         }

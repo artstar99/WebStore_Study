@@ -13,7 +13,7 @@ namespace WebStore_Study.Services.Mapping
         public static SectionDto ToDto(this Section section) =>
             section is null
                 ? null
-                : new SectionDto(section.Id, section.Name, section.Order, section.ParentId);
+                : new SectionDto(section.Id, section.Name, section.Order, section.ParentId, section.Products?.Count);
 
         public static Section FromDto(this SectionDto sectionDto) => sectionDto is null
             ? null
@@ -35,7 +35,7 @@ namespace WebStore_Study.Services.Mapping
         public static BrandDto ToDto(this Brand brand) =>
             brand is null
                 ? null
-                : new BrandDto(brand.Id, brand.Name, brand.Order);
+                : new BrandDto(brand.Id, brand.Name, brand.Order, brand.Products.Count);
 
         public static Brand FromDto(this BrandDto brandDto) => brandDto is null
             ? null

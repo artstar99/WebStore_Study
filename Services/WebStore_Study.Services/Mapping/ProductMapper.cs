@@ -23,14 +23,17 @@ namespace WebStore_Study.Services.Mapping
 
         public static ProductDto ToDto(this Product product) => product is null
             ? null
-            : new ProductDto (
+            : new ProductDto
+            (
                 product.Id,
                 product.Name,
                 product.Order,
-                product.Price, 
+                product.Price,
                 product.ImageUrl,
                 product.Brand.ToDto(),
-                product.Section.ToDto());
+                product.Section.ToDto()
+            );
+                
 
         public static Product FromDto(this ProductDto productDto) => productDto is null
             ? null

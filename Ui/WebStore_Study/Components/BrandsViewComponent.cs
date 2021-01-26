@@ -26,7 +26,7 @@ namespace WebStore_Study.Components
                 Id = b.Id,
                 Name = b.Name,
                 Order = b.Order,
-                ProductsCount=productData.GetProducts().Count(x=>x.Brand.Id==b.Id),
+                ProductsCount=b.ProductsCount,
             });
         
     }

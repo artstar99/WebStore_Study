@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebStore_Study.Domain;
 using WebStore_Study.Domain.Dto.Products;
-using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
 using WebStore_Study.Services.Contracts.V1;
 
@@ -35,26 +30,35 @@ namespace WebStore_Study.ServiceHosting.Controllers
         [HttpGet("brands/{id}")]
         public BrandDto GetBrandById(int id) => productData.GetBrandById(id);
 
-       
+
         [HttpPost]
-        public IEnumerable<ProductDto> GetProducts([FromBody]ProductFilter filter = null) => productData.GetProducts(filter);
+        public IEnumerable<ProductDto> GetProducts([FromBody] ProductFilter filter = null)
+        {
+            var products = productData.GetProducts(filter);
+            return products;
+        }
+
         [HttpGet("{id}")]
         public ProductDto GetProductById(int id) => productData.GetProductById(id);
 
 
-        [HttpPost]
-        public void Add(ProductDto product) => productData.Add(product);
+        [HttpPost("add")]
+        public void Add([FromBody] ProductDto product)
+        {
+            productData.Add(product);
+        }
+
+
         [HttpPut]
-        public void Update(ProductDto productNew) => productData.Update(productNew);
+        public void Update([FromBody]ProductDto productNew)
+        {
+            productData.Update(productNew);
+        }
+
         [HttpDelete("{id}")]
-        public void Delete(int id) => productData.Delete(id);
-
-
-
-
-
-
-
-
+        public void Delete(int id)
+        {
+            productData.Delete(id);
+        }
     }
 }

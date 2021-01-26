@@ -44,30 +44,26 @@ namespace WebStore_Study.Services.Products.InSQL
                 if (filter?.SectionId != null)
                     query = query.Where(p => p.SectionId == filter.SectionId);
             }
-
-
-
             return query.AsEnumerable().ToDto();
         }
 
 
         public void Update(ProductDto productNew)
         {
-            var product = GetProductById(productNew.Id);
-            product = productNew;
-            dbContext.Entry(product).State = EntityState.Modified;
-            //product.Price = productNew.Price;
-            //product.Name = productNew.Name;
-            //product.Order = productNew.Order;
-            //product.ImageUrl = productNew.ImageUrl;
-            //product.SectionId = productNew.SectionId;
-            //product.BrandId = productNew.BrandId;
+            var product = GetProductByIdNoDTO(productNew.Id);
+            product.ImageUrl = productNew.ImageUrl;
+            product.Name = productNew.Name;
+            product.Order = productNew.Order;
+            product.Price = productNew.Price;
+            product.BrandId = productNew.Brand.Id;
+            product.SectionId = productNew.Section.Id;
+           
             dbContext.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var product = GetProductById(id);
+            var product = GetProductByIdNoDTO(id);
             dbContext.Remove(product);
             dbContext.SaveChanges();
         }
@@ -83,9 +79,16 @@ namespace WebStore_Study.Services.Products.InSQL
             .Include(p => p.Section)
             .FirstOrDefault(p => p.Id == id).ToDto();
 
+        private Product GetProductByIdNoDTO(int id) => dbContext.Products
+            .Include(p => p.Brand)
+            .Include(p => p.Section)
+            .FirstOrDefault(p => p.Id == id);
         public void Add(ProductDto product)
         {
-            dbContext.Products.Add(product.FromDto());
+            var prod = product.FromDto();
+            prod.Brand = null;
+            prod.Section = null;
+            dbContext.Products.Add(prod);
             dbContext.SaveChanges();
         }
     }
