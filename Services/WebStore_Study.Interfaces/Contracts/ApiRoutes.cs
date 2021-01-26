@@ -11,6 +11,8 @@ namespace WebStore_Study.Services.Contracts.V1
 
         public const string Products = "api/products";
 
+        public const string Orders = "api/orders";
+
 
     }
 }
