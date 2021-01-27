@@ -48,7 +48,9 @@ namespace WebStore_Study
             services.AddIdentity<User, Role>()
                     .AddEntityFrameworkStores<WebStore_StudyDb>()
                     .AddDefaultTokenProviders();
+            
             services.AddDbContext<WebStore_StudyDb>(opt => opt.UseSqlServer(configuration.GetConnectionString("Default")));
+            
             services.AddHttpClient();
 
 
