@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using WebStore_Study.Clients.Identity;
 using WebStore_Study.Clients.Orders;
 using WebStore_Study.Clients.Products;
 using WebStore_Study.Clients.Values;
@@ -31,33 +32,26 @@ namespace WebStore_Study
             services.AddMvc().AddRazorRuntimeCompilation();
 
 
-            //User Services
-
             services.AddTransient<IUsersData, SqlEmployeeData>();
             services.AddTransient<IBlogService, SqlBlogData>();
-            services.AddTransient<IProductData, ProductsClient>();
-            services.AddTransient<WebStore_StudyDbInitializer>();
             services.AddScoped<ICartService, InCookiesCartService>();
-
+            
+            services.AddTransient<IProductData, ProductsClient>();
             services.AddScoped<IOrderService, OrdersClient>();
             services.AddScoped<IValuesService, ValuesClient>();
 
-            //
-
-
+            #region Identity
             services.AddIdentity<User, Role>()
-                    .AddEntityFrameworkStores<WebStore_StudyDb>()
-                    .AddDefaultTokenProviders();
-            
-            services.AddDbContext<WebStore_StudyDb>(opt => opt.UseSqlServer(configuration.GetConnectionString("Default")));
-            
+            .AddIdentityWebApiClients()
+            .AddDefaultTokenProviders(); 
+            #endregion
+
+            #region База данных
+            services.AddTransient<WebStore_StudyDbInitializer>();
+            services.AddDbContext<WebStore_StudyDb>(opt => opt.UseSqlServer(configuration.GetConnectionString("Default"))); 
+            #endregion
+
             services.AddHttpClient();
-
-
-           
-
-
-
 
             services.Configure<IdentityOptions>(opt =>
             {
@@ -68,13 +62,8 @@ namespace WebStore_Study
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequiredUniqueChars = 3; 
-                
-                
 #endif
-
                 opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.";
-                
-                
                 opt.Lockout.AllowedForNewUsers = false;
                 opt.Lockout.MaxFailedAccessAttempts = 10;
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
@@ -86,11 +75,9 @@ namespace WebStore_Study
                 opt.Cookie.Name = "WebStoreStudyKostyaKobetskoy";
                 opt.Cookie.HttpOnly = true;
                 opt.ExpireTimeSpan = TimeSpan.FromDays(10);
-
                 opt.LoginPath = "/Account/Login";
                 opt.LogoutPath = "/Account/Logout";
                 opt.AccessDeniedPath = "/Account/AccessDenied";
-
                 opt.SlidingExpiration = true;
             });
 

@@ -191,7 +191,7 @@ namespace WebStore_Study.ServiceHosting.Controllers.Identity
             return user.EmailConfirmed;
         }
 
-        [HttpGet("UserFindByEmail/{email}")]
+        [HttpGet("User/FindByEmail/{email}")]
         public async Task<User> FindByEmailAsync(string email) => await userStore.FindByEmailAsync(email);
 
         [HttpPost("GetNormalizedEmail")]

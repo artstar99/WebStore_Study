@@ -27,58 +27,45 @@ namespace WebStore_Study.Clients.Base
             this.Address = Address;
         }
 
-        #region GET
         protected T Get<T>(string url) => GetAsync<T>(url).Result;
-        protected async Task<T> GetAsync<T>(string url, CancellationToken cancellationToken=default)
+        protected async Task<T> GetAsync<T>(string url, CancellationToken Cancel = default)
         {
-            var response = await Http.GetAsync(url, cancellationToken);
-            return await response.EnsureSuccessStatusCode().Content.ReadAsAsync<T>(cancellationToken);
+            var response = await Http.GetAsync(url, Cancel);
+            return await response.EnsureSuccessStatusCode().Content.ReadAsAsync<T>(Cancel);
         }
-        #endregion
 
-
-        #region POST
         protected HttpResponseMessage Post<T>(string url, T item) => PostAsync(url, item).Result;
-        protected async Task<HttpResponseMessage> PostAsync<T>(string url, T item, CancellationToken cancellationToken = default)
+        protected async Task<HttpResponseMessage> PostAsync<T>(string url, T item, CancellationToken Cancel = default)
         {
-            
-            var response = await Http.PostAsJsonAsync(url, item, cancellationToken);
+            var response = await Http.PostAsJsonAsync(url, item, Cancel);
             return response.EnsureSuccessStatusCode();
         }
-        #endregion
 
-        #region PUT
         protected HttpResponseMessage Put<T>(string url, T item) => PutAsync(url, item).Result;
-        protected async Task<HttpResponseMessage> PutAsync<T>(string url, T item, CancellationToken cancellationToken = default)
+        protected async Task<HttpResponseMessage> PutAsync<T>(string url, T item, CancellationToken Cancel = default)
         {
-            var response = await Http.PutAsJsonAsync(url, item, cancellationToken);
+            var response = await Http.PutAsJsonAsync(url, item, Cancel);
             return response.EnsureSuccessStatusCode();
         }
-        #endregion
 
-        #region DELETE
         protected HttpResponseMessage Delete(string url) => DeleteAsync(url).Result;
-        protected async Task<HttpResponseMessage> DeleteAsync(string url, CancellationToken cancellationToken = default)
+        protected async Task<HttpResponseMessage> DeleteAsync(string url, CancellationToken Cancel = default)
         {
-            var response = await Http.DeleteAsync(url, cancellationToken);
+            var response = await Http.DeleteAsync(url, Cancel);
             return response;
         }
-        #endregion
 
-        public void Dispose()
-        {
-            Dispose(true);
-        }
+        public void Dispose() => Dispose(true);
 
-        protected virtual void Dispose( bool disposing)
+        protected virtual void Dispose(bool Disposing)
         {
-            if (disposing)
+            if (Disposing)
             {
-                //освобождение управляемых ресурсов
+                // освобождение управляемых ресурсов
                 Http.Dispose();
             }
 
-            //освобождени е неуправляемых ресурсов
+            // освобождение неуправляемых ресурсов
         }
 
 

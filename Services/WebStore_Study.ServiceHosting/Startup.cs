@@ -62,7 +62,7 @@ namespace WebStore_Study.ServiceHosting
             services.AddScoped<ICartService, InCookiesCartService>();
 
             services.AddScoped<IOrderService, SqlOrderService>();
-            services.AddScoped<IValuesService, ValuesClient>();
+           
 
 
             services.AddControllers();
