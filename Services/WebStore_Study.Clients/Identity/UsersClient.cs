@@ -11,14 +11,15 @@ using Microsoft.AspNetCore.Identity;
 using WebStore_Study.Clients.Base;
 using WebStore_Study.Domain.Dto.Identity;
 using WebStore_Study.Domain.Entities;
+using WebStore_Study.Interfaces.Contracts;
 using WebStore_Study.Interfaces.Services.Identity;
-using WebStore_Study.Services.Contracts.V1;
+
 
 namespace WebStore_Study.Clients.Identity
 {
     public class UsersClient : BaseClient, IUsersClient
     {
-        public UsersClient(IConfiguration configuration) : base(configuration, ApiRoutes.Identity.User)
+        public UsersClient(IConfiguration configuration) : base(configuration, ApiRoutes.Version1.Identity.User)
         {
         }
 

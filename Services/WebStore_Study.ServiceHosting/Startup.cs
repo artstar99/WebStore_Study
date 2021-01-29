@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
 using WebStore_Study.Clients.Values;
 using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain.Entities;
@@ -62,13 +63,26 @@ namespace WebStore_Study.ServiceHosting
             services.AddScoped<ICartService, InCookiesCartService>();
 
             services.AddScoped<IOrderService, SqlOrderService>();
-           
+
 
 
             services.AddControllers();
+
+            const string webstoreApiXml = "WebStore_Study.ServiceHosting.xml";
+            const string webstoreDomainXml = "WebStore_Study.Domain.xml";
+            const string debugPath = "bin/Debug/net5.0";
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebStore_Study.ServiceHosting", Version = "v1" });
+
+                c.IncludeXmlComments("WebStore_Study.ServiceHosting.xml");
+
+                if (File.Exists(webstoreDomainXml))
+                    c.IncludeXmlComments(webstoreDomainXml);
+                else if (File.Exists(Path.Combine(debugPath, webstoreDomainXml)))
+                    c.IncludeXmlComments(Path.Combine(debugPath, webstoreDomainXml));
+
             });
 
 

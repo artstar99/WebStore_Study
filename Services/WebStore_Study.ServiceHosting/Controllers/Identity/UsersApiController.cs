@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain.Dto.Identity;
 using WebStore_Study.Domain.Entities;
-using WebStore_Study.Services.Contracts.V1;
+using WebStore_Study.Interfaces.Contracts;
+
 
 namespace WebStore_Study.ServiceHosting.Controllers.Identity
 {
-    [Route(ApiRoutes.Identity.User)]
+    [Route(ApiRoutes.Version1.Identity.User)]
     [ApiController]
     public class UsersApiController : ControllerBase
     {

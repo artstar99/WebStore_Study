@@ -5,14 +5,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using WebStore_Study.Clients.Base;
 using WebStore_Study.Domain.Entities;
+using WebStore_Study.Interfaces.Contracts;
 using WebStore_Study.Interfaces.Services.Identity;
-using WebStore_Study.Services.Contracts.V1;
+
 
 namespace WebStore_Study.Clients.Identity
 {
     public class RolesClient : BaseClient, IRolesClient
     {
-        public RolesClient(IConfiguration configuration) : base(configuration, ApiRoutes.Identity.Role)
+        public RolesClient(IConfiguration configuration) : base(configuration, ApiRoutes.Version1.Identity.Role)
         {
         }
 

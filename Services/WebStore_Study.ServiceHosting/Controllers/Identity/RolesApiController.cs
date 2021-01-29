@@ -8,11 +8,12 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain.Entities;
-using WebStore_Study.Services.Contracts.V1;
+using WebStore_Study.Interfaces.Contracts;
+
 
 namespace WebStore_Study.ServiceHosting.Controllers.Identity
 {
-    [Route(ApiRoutes.Identity.Role)]
+    [Route(ApiRoutes.Version1.Identity.Role)]
     [ApiController]
     public class RolesApiController : ControllerBase
     {

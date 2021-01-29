@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using WebStore_Study.Domain;
 using WebStore_Study.Domain.Dto.Products;
+using WebStore_Study.Interfaces.Contracts;
 using WebStore_Study.Interfaces.Services;
-using WebStore_Study.Services.Contracts.V1;
+
 
 namespace WebStore_Study.ServiceHosting.Controllers
 {
     /// <summary>
     /// API управления товарами
     /// </summary>
-    [Route(ApiRoutes.Products)]
+    [Route(ApiRoutes.Version1.Products)]
     [ApiController]
     public class ProductsApiController : ControllerBase, IProductData
     {
