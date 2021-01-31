@@ -7,7 +7,7 @@ namespace WebStore_Study.Logger
 {
     public static class Log4NetLoggerFactoryExtensions
     {
-        public static ILoggerFactory AddLog4Net(ILoggerFactory factory, string configurationFile = "log4net.config")
+        public static ILoggerFactory AddLog4Net(this ILoggerFactory factory, string configurationFile = "log4net.config")
         {
             if (configurationFile is null) throw new ArgumentNullException(nameof(configurationFile));
             

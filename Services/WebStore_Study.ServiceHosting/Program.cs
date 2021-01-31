@@ -22,6 +22,6 @@ namespace WebStore_Study.ServiceHosting
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }).ConfigureLogging(opt=>opt.ClearProviders());
     }
 }

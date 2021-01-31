@@ -8,11 +8,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
+using Microsoft.Extensions.Logging;
 using WebStore_Study.Clients.Values;
 using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
 using WebStore_Study.Interfaces.TestApi;
+using WebStore_Study.Logger;
 using WebStore_Study.Services.Data;
 using WebStore_Study.Services.Products.InCookies;
 using WebStore_Study.Services.Products.InSQL;
@@ -93,8 +95,10 @@ namespace WebStore_Study.ServiceHosting
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddLog4Net();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

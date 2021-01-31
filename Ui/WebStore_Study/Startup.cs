@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Microsoft.Extensions.Logging;
 using WebStore_Study.Clients.Identity;
 using WebStore_Study.Clients.Orders;
 using WebStore_Study.Clients.Products;
@@ -14,6 +15,7 @@ using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
 using WebStore_Study.Interfaces.TestApi;
+using WebStore_Study.Logger;
 using WebStore_Study.Services.Data;
 using WebStore_Study.Services.Products.InCookies;
 using WebStore_Study.Services.Products.InSQL;
@@ -85,8 +87,11 @@ namespace WebStore_Study
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStore_StudyDbInitializer db)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStore_StudyDbInitializer db, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddLog4Net();
+
+
             db.Initialize();
             if (env.IsDevelopment())
             {
