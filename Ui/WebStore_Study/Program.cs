@@ -24,7 +24,7 @@ namespace WebStore_Study
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                }).UseSerilog((host, log)=>log.ReadFrom.Configuration(host.Configuration)
+                }).UseSerilog((host, log)=>log.ReadFrom.Configuration(host.Configuration).WriteTo.Seq("http://localhost:5341/")
                     //.MinimumLevel.Debug()
                     //.MinimumLevel.Override("Microsoft", LogEventLevel.Error)
                     //.Enrich.FromLogContext()
