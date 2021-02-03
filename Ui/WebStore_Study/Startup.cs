@@ -16,6 +16,7 @@ using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
 using WebStore_Study.Interfaces.TestApi;
 using WebStore_Study.Logger;
+using WebStore_Study.Middleware;
 using WebStore_Study.Services.Data;
 using WebStore_Study.Services.Products.InCookies;
 using WebStore_Study.Services.Products.InSQL;
@@ -105,7 +106,7 @@ namespace WebStore_Study
             app.UseAuthentication();
             app.UseAuthorization();
 
-           
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
