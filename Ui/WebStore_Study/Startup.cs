@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Microsoft.Extensions.Logging;
+using WebStore_Study.Clients.Identity;
 using WebStore_Study.Clients.Orders;
 using WebStore_Study.Clients.Products;
 using WebStore_Study.Clients.Values;
@@ -13,6 +15,7 @@ using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
 using WebStore_Study.Interfaces.TestApi;
+using WebStore_Study.Logger;
 using WebStore_Study.Services.Data;
 using WebStore_Study.Services.Products.InCookies;
 using WebStore_Study.Services.Products.InSQL;
@@ -31,31 +34,26 @@ namespace WebStore_Study
             services.AddMvc().AddRazorRuntimeCompilation();
 
 
-            //User Services
-
             services.AddTransient<IUsersData, SqlEmployeeData>();
             services.AddTransient<IBlogService, SqlBlogData>();
-            services.AddTransient<IProductData, ProductsClient>();
-            services.AddTransient<WebStore_StudyDbInitializer>();
             services.AddScoped<ICartService, InCookiesCartService>();
-
+            
+            services.AddTransient<IProductData, ProductsClient>();
             services.AddScoped<IOrderService, OrdersClient>();
             services.AddScoped<IValuesService, ValuesClient>();
 
-            //
-
-
+            #region Identity
             services.AddIdentity<User, Role>()
-                    .AddEntityFrameworkStores<WebStore_StudyDb>()
-                    .AddDefaultTokenProviders();
-            services.AddDbContext<WebStore_StudyDb>(opt => opt.UseSqlServer(configuration.GetConnectionString("Default")));
+            .AddIdentityWebApiClients()
+            .AddDefaultTokenProviders(); 
+            #endregion
+
+            #region База данных
+            services.AddTransient<WebStore_StudyDbInitializer>();
+            services.AddDbContext<WebStore_StudyDb>(opt => opt.UseSqlServer(configuration.GetConnectionString("Default"))); 
+            #endregion
+
             services.AddHttpClient();
-
-
-           
-
-
-
 
             services.Configure<IdentityOptions>(opt =>
             {
@@ -66,13 +64,8 @@ namespace WebStore_Study
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequiredUniqueChars = 3; 
-                
-                
 #endif
-
                 opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.";
-                
-                
                 opt.Lockout.AllowedForNewUsers = false;
                 opt.Lockout.MaxFailedAccessAttempts = 10;
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
@@ -84,11 +77,9 @@ namespace WebStore_Study
                 opt.Cookie.Name = "WebStoreStudyKostyaKobetskoy";
                 opt.Cookie.HttpOnly = true;
                 opt.ExpireTimeSpan = TimeSpan.FromDays(10);
-
                 opt.LoginPath = "/Account/Login";
                 opt.LogoutPath = "/Account/Logout";
                 opt.AccessDeniedPath = "/Account/AccessDenied";
-
                 opt.SlidingExpiration = true;
             });
 
@@ -96,8 +87,11 @@ namespace WebStore_Study
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStore_StudyDbInitializer db)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStore_StudyDbInitializer db/*, ILoggerFactory loggerFactory*/)
         {
+            //loggerFactory.AddLog4Net();
+
+
             db.Initialize();
             if (env.IsDevelopment())
             {

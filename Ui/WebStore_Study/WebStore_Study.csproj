@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="log4net" Version="2.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -14,6 +15,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.4.1-dev-00188" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.2-dev-10284" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\WebStore_Study.Domain\WebStore_Study.Domain.csproj" />
+    <ProjectReference Include="..\..\Common\WebStore_Study.Logger\WebStore_Study.Logger.csproj" />
     <ProjectReference Include="..\..\Services\WebStore_Study.Clients\WebStore_Study.Clients.csproj" />
     <ProjectReference Include="..\..\Services\WebStore_Study.DAL\WebStore_Study.DAL.csproj" />
     <ProjectReference Include="..\..\Services\WebStore_Study.Interfaces\WebStore_Study.Interfaces.csproj" />
