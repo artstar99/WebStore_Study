@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace WebStore_Study.ServiceHosting
@@ -22,6 +21,6 @@ namespace WebStore_Study.ServiceHosting
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                }).ConfigureLogging(opt=>opt.ClearProviders());
+                });
     }
 }
