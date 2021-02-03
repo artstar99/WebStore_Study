@@ -9,9 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using WebStore_Study.Clients.Base;
 using WebStore_Study.Domain.Dto.Orders;
-using WebStore_Study.Interfaces.Contracts;
 using WebStore_Study.Interfaces.Services;
-
+using WebStore_Study.Services.Contracts.V1;
 
 namespace WebStore_Study.Clients.Orders
 {
@@ -20,7 +19,7 @@ namespace WebStore_Study.Clients.Orders
         private readonly IConfiguration configuration;
         private readonly ILogger<OrdersClient> logger;
 
-        public OrdersClient(IConfiguration configuration, ILogger<OrdersClient> logger):base(configuration, ApiRoutes.Version1.Orders)
+        public OrdersClient(IConfiguration configuration, ILogger<OrdersClient> logger):base(configuration, ApiRoutes.Orders)
         {
             this.configuration = configuration;
             this.logger = logger;

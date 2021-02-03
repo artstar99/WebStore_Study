@@ -4,15 +4,14 @@ using System.Net.Http;
 using WebStore_Study.Clients.Base;
 using WebStore_Study.Domain;
 using WebStore_Study.Domain.Dto.Products;
-using WebStore_Study.Interfaces.Contracts;
 using WebStore_Study.Interfaces.Services;
-
+using WebStore_Study.Services.Contracts.V1;
 
 namespace WebStore_Study.Clients.Products
 {
     public class ProductsClient : BaseClient, IProductData
     {
-        public ProductsClient(IConfiguration configuration) : base(configuration, ApiRoutes.Version1.Products) { }
+        public ProductsClient(IConfiguration configuration) : base(configuration, ApiRoutes.Products) { }
 
         public IEnumerable<SectionDto> GetSections() => Get<IEnumerable<SectionDto>>($"{Address}/sections");
 

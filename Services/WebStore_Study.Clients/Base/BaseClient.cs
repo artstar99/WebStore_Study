@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebStore_Study.Clients.Base
 {
-    public abstract class BaseClient:IDisposable
+    public abstract class BaseClient
     {
         protected HttpClient Http { get; }
         public string Address { get; }
@@ -27,46 +26,43 @@ namespace WebStore_Study.Clients.Base
             this.Address = Address;
         }
 
+        #region GET
         protected T Get<T>(string url) => GetAsync<T>(url).Result;
-        protected async Task<T> GetAsync<T>(string url, CancellationToken Cancel = default)
+        protected async Task<T> GetAsync<T>(string url)
         {
-            var response = await Http.GetAsync(url, Cancel);
-            return await response.EnsureSuccessStatusCode().Content.ReadAsAsync<T>(Cancel);
+            var response = await Http.GetAsync(url);
+            return await response.EnsureSuccessStatusCode().Content.ReadAsAsync<T>();
         }
+        #endregion
 
+
+        #region POST
         protected HttpResponseMessage Post<T>(string url, T item) => PostAsync(url, item).Result;
-        protected async Task<HttpResponseMessage> PostAsync<T>(string url, T item, CancellationToken Cancel = default)
+        protected async Task<HttpResponseMessage> PostAsync<T>(string url, T item)
         {
-            var response = await Http.PostAsJsonAsync(url, item, Cancel);
+            
+            var response = await Http.PostAsJsonAsync(url, item);
             return response.EnsureSuccessStatusCode();
         }
+        #endregion
 
+        #region PUT
         protected HttpResponseMessage Put<T>(string url, T item) => PutAsync(url, item).Result;
-        protected async Task<HttpResponseMessage> PutAsync<T>(string url, T item, CancellationToken Cancel = default)
+        protected async Task<HttpResponseMessage> PutAsync<T>(string url, T item)
         {
-            var response = await Http.PutAsJsonAsync(url, item, Cancel);
+            var response = await Http.PutAsJsonAsync(url, item);
             return response.EnsureSuccessStatusCode();
         }
+        #endregion
 
+        #region DELETE
         protected HttpResponseMessage Delete(string url) => DeleteAsync(url).Result;
-        protected async Task<HttpResponseMessage> DeleteAsync(string url, CancellationToken Cancel = default)
+        protected async Task<HttpResponseMessage> DeleteAsync(string url)
         {
-            var response = await Http.DeleteAsync(url, Cancel);
+            var response = await Http.DeleteAsync(url);
             return response;
-        }
-
-        public void Dispose() => Dispose(true);
-
-        protected virtual void Dispose(bool Disposing)
-        {
-            if (Disposing)
-            {
-                // освобождение управляемых ресурсов
-                Http.Dispose();
-            }
-
-            // освобождение неуправляемых ресурсов
-        }
+        } 
+        #endregion
 
 
 
