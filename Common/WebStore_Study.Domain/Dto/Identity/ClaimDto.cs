@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebStore_Study.Domain.Dto.Identity
 {
+    //для коммита
     public abstract class ClaimDto : UserDto
     {
         public IEnumerable<Claim> Claims { get; set; }

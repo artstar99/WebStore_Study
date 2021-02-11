@@ -9,6 +9,7 @@ using WebStore_Study.Domain.Entities;
 
 namespace WebStore_Study.Domain.Dto.Identity
 {
+    //для коммита
     public abstract class UserDto
     {
         public User User { get; set; }
