@@ -21,6 +21,14 @@ namespace WebStore_Study
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }).UseSerilog((host, log)=>log.ReadFrom.Configuration(host.Configuration).WriteTo.Seq("http://localhost:5341/")
+                    //.MinimumLevel.Debug()
+                    //.MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+                    //.Enrich.FromLogContext()
+                    //.WriteTo.Console(
+                    //    outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}]{SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}")
+                    //.WriteTo.RollingFile(@".\Log\Serilog.log")
+                    //.WriteTo.File(new JsonFormatter(",", true), @".\Log\Serilog.log.json")
+                );
     }
 }

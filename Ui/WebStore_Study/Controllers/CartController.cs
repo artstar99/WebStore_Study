@@ -11,13 +11,13 @@ namespace WebStore_Study.Controllers
     public class CartController : Controller
     {
         private readonly ICartService cartService;
-        
+
 
         public CartController(ICartService cartService)
         {
             this.cartService = cartService;
         }
-       
+
         public IActionResult Index()
         {
             return View(new CartOrderViewModel
@@ -48,7 +48,8 @@ namespace WebStore_Study.Controllers
             cartService.Clear();
             return RedirectToAction(nameof(Index));
         }
-        [Authorize][HttpPost]
+        [Authorize]
+        [HttpPost]
         public async Task<IActionResult> CheckOut(OrderViewModel orderModel, [FromServices] IOrderService orderService)
         {
             if (!ModelState.IsValid)
@@ -58,7 +59,6 @@ namespace WebStore_Study.Controllers
                     Cart = cartService.TransformFromCart(),
                     Order = orderModel
                 });
-                
             }
 
             var createOrderModel = new CreateOrderModel(
@@ -73,11 +73,11 @@ namespace WebStore_Study.Controllers
             var order = await orderService.CreateOrder(User.Identity!.Name, createOrderModel);
 
             //var order = await orderService.CreateOrder(User.Identity!.Name, cartService.TransformFromCart(), orderModel);
-            
-            
-            
+
+
+
             cartService.Clear();
-            return RedirectToAction("OrderConfirmed", new {id=order.Id});
+            return RedirectToAction("OrderConfirmed", new { id = order.Id });
         }
 
         public IActionResult OrderConfirmed(int id)
