@@ -23,6 +23,7 @@ namespace WebStore_Study.Clients.Identity
         {
         }
 
+        //для коммита
         #region Implementation of IUserStore<User>
         public async Task<string> GetUserIdAsync(User user, CancellationToken cancel)
         {

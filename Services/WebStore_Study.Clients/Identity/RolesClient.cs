@@ -17,6 +17,7 @@ namespace WebStore_Study.Clients.Identity
         {
         }
 
+        //для коммита
         #region IRoleStore<Role>
 
         public async Task<IdentityResult> CreateAsync(Role role, CancellationToken cancel) =>

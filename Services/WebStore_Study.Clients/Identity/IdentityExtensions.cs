@@ -27,7 +27,7 @@ namespace WebStore_Study.Clients.Identity
 
             return services;
         }
-
+      //Коммент для коммита
 
         public static IdentityBuilder AddIdentityWebApiClients(this IdentityBuilder builder)
         {
