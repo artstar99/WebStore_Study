@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebStore_Study.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:WebStore_Study.Domain.Dto.Products.BrandDto">
+            <summary>
+            Бренд
+            </summary>
+        </member>
+        <member name="M:WebStore_Study.Domain.Dto.Products.BrandDto.#ctor(System.Int32,System.String,System.Int32,System.Int32)">
+            <summary>
+            Бренд
+            </summary>
+        </member>
+        <member name="T:WebStore_Study.Domain.Dto.Products.SectionDto">
+            <summary>
+            Секция
+            </summary>
+        </member>
+        <member name="M:WebStore_Study.Domain.Dto.Products.SectionDto.#ctor(System.Int32,System.String,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Секция
+            </summary>
+        </member>
+        <member name="T:WebStore_Study.Domain.Dto.Products.ProductDto">
+            <summary>
+            Товар
+            </summary>
+        </member>
+        <member name="M:WebStore_Study.Domain.Dto.Products.ProductDto.#ctor(System.Int32,System.String,System.Int32,System.Decimal,System.String,WebStore_Study.Domain.Dto.Products.BrandDto,WebStore_Study.Domain.Dto.Products.SectionDto)">
+            <summary>
+            Товар
+            </summary>
+        </member>
+        <member name="P:WebStore_Study.Domain.ViewModels.BlogsViewModel.Blogs">
+            <summary> Список блогов для данной страницы </summary>
+        </member>
+        <member name="P:WebStore_Study.Domain.ViewModels.BlogsViewModel.NumberOfPages">
+            <summary>Кол-во страниц</summary>
+        </member>
+        <member name="P:WebStore_Study.Domain.ViewModels.BlogsViewModel.CurrentPage">
+            <summary>Активная страница </summary>
+        </member>
+        <member name="P:WebStore_Study.Domain.ViewModels.UsersViewModel.FirstName">
+            <summary> Имя </summary>
+        </member>
+        <member name="P:WebStore_Study.Domain.ViewModels.UsersViewModel.LastName">
+            <summary> Фамилия </summary>
+        </member>
+        <member name="P:WebStore_Study.Domain.ViewModels.UsersViewModel.Age">
+            <summary> Возраст </summary>
+        </member>
+    </members>
+</doc>

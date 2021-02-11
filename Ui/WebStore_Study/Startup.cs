@@ -13,7 +13,7 @@ using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Services;
 using WebStore_Study.Interfaces.TestApi;
-using WebStore_Study.Logger;
+
 using WebStore_Study.Middleware;
 using WebStore_Study.Services.Data;
 using WebStore_Study.Services.Products;

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebStore_Study.ServiceHosting</name>
+    </assembly>
+    <members>
+        <member name="T:WebStore_Study.ServiceHosting.Controllers.ProductsApiController">
+            <summary>
+            API управления товарами
+            </summary>
+        </member>
+        <member name="M:WebStore_Study.ServiceHosting.Controllers.ProductsApiController.GetSections">
+            <summary>
+            Получение всех секций
+            </summary>
+            <returns>Список секций магазина</returns>
+        </member>
+        <member name="M:WebStore_Study.ServiceHosting.Controllers.ProductsApiController.GetSectionById(System.Int32)">
+            <summary>
+            Получение секции по id
+            </summary>
+            <param name="id">Идентификатор секции</param>
+        </member>
+        <member name="M:WebStore_Study.ServiceHosting.Controllers.ProductsApiController.GetBrands">
+            <summary>
+            Получение списка всех брендов
+            </summary>
+            <returns>Список брендов</returns>
+        </member>
+        <member name="M:WebStore_Study.ServiceHosting.Controllers.ProductsApiController.GetBrandById(System.Int32)">
+            <summary>
+            Получение бренда по id
+            </summary>
+            <param name="id">Идентификатор бренда</param>
+        </member>
+        <member name="M:WebStore_Study.ServiceHosting.Controllers.ProductsApiController.GetProducts(WebStore_Study.Domain.ProductFilter)">
+            <summary>
+            Получение списка товаров по фильтру
+            </summary>
+            <param name="filter">Фильтр по секции/бренду/id-шникам</param>
+        </member>
+        <member name="M:WebStore_Study.ServiceHosting.Controllers.ProductsApiController.GetProductById(System.Int32)">
+            <summary>
+            Получение товара по id
+            </summary>
+            <param name="id">Идентификатор товара</param>
+        </member>
+        <member name="M:WebStore_Study.ServiceHosting.Controllers.ProductsApiController.Add(WebStore_Study.Domain.Dto.Products.ProductDto)">
+            <summary>
+            Добавление товара
+            </summary>
+            <param name="product">Товар</param>
+        </member>
+        <member name="M:WebStore_Study.ServiceHosting.Controllers.ProductsApiController.Update(WebStore_Study.Domain.Dto.Products.ProductDto)">
+            <summary>
+            Обновление существующего товара
+            </summary>
+            <param name="productNew">Экземпляр нового товар</param>
+        </member>
+        <member name="M:WebStore_Study.ServiceHosting.Controllers.ProductsApiController.Delete(System.Int32)">
+            <summary>
+            Удаление товара
+            </summary>
+            <param name="id">Идентификатор удаляемого товара</param>
+        </member>
+    </members>
+</doc>
