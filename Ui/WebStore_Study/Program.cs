@@ -7,10 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Serilog;
+using Serilog.Events;
+using Serilog.Formatting.Json;
 
 namespace WebStore_Study
 {
-   public class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
@@ -22,7 +24,7 @@ namespace WebStore_Study
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                }).UseSerilog((host, log)=>log.ReadFrom.Configuration(host.Configuration).WriteTo.Seq("http://localhost:5341/")
+                }).UseSerilog((host, log) => log.ReadFrom.Configuration(host.Configuration).WriteTo.Seq("http://localhost:5341/")
                     //.MinimumLevel.Debug()
                     //.MinimumLevel.Override("Microsoft", LogEventLevel.Error)
                     //.Enrich.FromLogContext()
