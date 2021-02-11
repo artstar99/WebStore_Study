@@ -8,6 +8,7 @@ namespace WebStore_Study.Services.Contracts.V1
     {
         public static class Version1
         {
+            //для коммита
             private const string v1 = "v1";
 
             public const string Values = "api" + v1 + "/values";
