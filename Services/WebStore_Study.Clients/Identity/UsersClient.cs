@@ -13,7 +13,6 @@ using WebStore_Study.Domain.Dto.Identity;
 using WebStore_Study.Domain.Entities;
 using WebStore_Study.Interfaces.Contracts;
 using WebStore_Study.Interfaces.Services.Identity;
-using WebStore_Study.Services.Contracts.V1;
 
 
 namespace WebStore_Study.Clients.Identity

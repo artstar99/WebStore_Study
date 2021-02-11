@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebStore_Study.Services.Contracts.V1
+namespace WebStore_Study.Interfaces.Contracts
 {
     public static class ApiRoutes
     {
+
+
         public static class Version1
         {
             //для коммита

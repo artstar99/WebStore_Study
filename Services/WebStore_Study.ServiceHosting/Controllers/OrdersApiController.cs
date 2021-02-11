@@ -1,19 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using WebStore_Study.Domain.Dto.Orders;
+using WebStore_Study.Interfaces.Contracts;
 using WebStore_Study.Interfaces.Services;
-using WebStore_Study.Services.Contracts.V1;
-using WebStore_Study.Domain.Entities.Orders;
-using WebStore_Study.Domain.ViewModels;
 
 namespace WebStore_Study.ServiceHosting.Controllers
 {
-    [Route(ApiRoutes.Orders)]
+    [Route(ApiRoutes.Version1.Orders)]
     [ApiController]
     public class OrdersApiController : ControllerBase, IOrderService
     {
@@ -27,10 +22,10 @@ namespace WebStore_Study.ServiceHosting.Controllers
         }
 
         [HttpPost("{UserName}")]
-        public async Task<OrderDto> CreateOrder(string userName, [FromBody]CreateOrderModel orderModel)
+        public async Task<OrderDto> CreateOrder(string userName, [FromBody] CreateOrderModel orderModel)
         {
             logger.LogInformation($"Формирование заказа для пользователя{userName}");
-            var ord= await orderService.CreateOrder(userName, orderModel);
+            var ord = await orderService.CreateOrder(userName, orderModel);
             return ord;
         }
 
