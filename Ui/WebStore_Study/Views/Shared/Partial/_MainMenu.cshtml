@@ -1,7 +1,7 @@
 ﻿
 
 <ul class="nav navbar-nav collapse navbar-collapse">
-    <li><a asp-controller="Home" asp-action="Index" class="active">Home</a></li>
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
     <li class="dropdown">
         <a href="#">Shop<i class="fa fa-angle-down"></i></a>
         <ul role="menu" class="sub-menu">
@@ -21,6 +21,15 @@
     </li>
     <li><a asp-controller="Error404" asp-action="Index">404</a></li>
     <li><a asp-controller="ContactUs" asp-action="Index">Контакты</a></li>
-    <li><a asp-controller="User" asp-action="Index">Сотрудники</a></li>
+    <li><a asp-controller="User" asp-action="Index" class="@IsActive("User")">Сотрудники</a></li>
     <li><a asp-controller="TestWebApi" asp-action="Index">WebApi</a></li>
 </ul>
+
+@functions
+{
+    string IsActive(string controller, string Action="Index") =>
+        Equals(controller, ViewContext.RouteData.Values["Controller"])
+        && Equals(Action, ViewContext.RouteData.Values["Action"])
+            ? "active"
+            : null;
+}
