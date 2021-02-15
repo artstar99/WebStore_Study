@@ -1,26 +1,31 @@
 ﻿
 
 <ul class="nav navbar-nav collapse navbar-collapse">
-    <li><a asp-controller="Home" asp-action="Index" class="active">Home</a></li>
+    <li><a taghelper-is-active-route asp-controller="Home" asp-action="Index">Home</a></li>
     <li class="dropdown">
-        <a href="#">Shop<i class="fa fa-angle-down"></i></a>
+        <a taghelper-ignore-action taghelper-is-active-route asp-controller="Catalog" asp-action="Shop">Магазин<i class="fa fa-angle-down"></i></a>
         <ul role="menu" class="sub-menu">
-            <li><a asp-controller="Catalog" asp-action="Shop">Товары</a></li>
-            <li><a asp-controller="Catalog" asp-action="Details" asp-route-id="1">Информация о товаре</a></li>
-            <li><a asp-controller="Checkout" asp-action="Index">Оформить заказ</a></li>
-            <li><a asp-controller="Cart" asp-action="Index">Корзина</a></li>
-            <li><a asp-controller="Account" asp-action="Login">Логин</a></li>
+            <li><a taghelper-is-active-route asp-controller="Catalog" asp-action="Shop">Товары</a></li>
         </ul>
     </li>
     <li class="dropdown">
-        <a href="#">Blog<i class="fa fa-angle-down"></i></a>
+        <a taghelper-ignore-action taghelper-is-active-route asp-controller="Blogs" asp-action="Index">Блоги<i class="fa fa-angle-down"></i></a>
         <ul role="menu" class="sub-menu">
-            <li><a asp-controller="Blogs" asp-action="Index">Блоги</a></li>
-            <li><a asp-controller="Blogs" asp-action="BlogSingle">Запись блога</a></li>
+            <li><a taghelper-is-active-route asp-controller="Blogs" asp-action="Index">Все</a></li>
+            <li><a taghelper-is-active-route asp-controller="Blogs" asp-action="BlogSingle">Запись блога</a></li>
         </ul>
     </li>
-    <li><a asp-controller="Error404" asp-action="Index">404</a></li>
-    <li><a asp-controller="ContactUs" asp-action="Index">Контакты</a></li>
-    <li><a asp-controller="User" asp-action="Index">Сотрудники</a></li>
-    <li><a asp-controller="TestWebApi" asp-action="Index">WebApi</a></li>
+    <li><a taghelper-is-active-route asp-controller="Error404" asp-action="Index">404</a></li>
+    <li><a taghelper-is-active-route asp-controller="ContactUs" asp-action="Index">Контакты</a></li>
+    <li><a asp-controller="User" asp-action="Index" class="@IsActive("User")">Сотрудники</a></li>
+    <li><a taghelper-is-active-route asp-controller="TestWebApi" asp-action="Index">WebApi</a></li>
 </ul>
+
+@functions
+{
+    string IsActive(string controller, string Action="Index") =>
+        Equals(controller, ViewContext.RouteData.Values["Controller"])
+        && Equals(Action, ViewContext.RouteData.Values["Action"])
+            ? "active"
+            : null;
+}

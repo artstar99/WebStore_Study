@@ -15,7 +15,13 @@
             <div class="product-overlay">
                 <div class="overlay-content">
                     <h2>@Model.Price.ToString("C")</h2>
-                    <p><a asp-controller="Catalog" asp-action="Details" asp-route-id="@Model.Id">@Model.Name</a></p>
+                    <p><a asp-controller="Catalog"
+                          asp-action="Details"
+                          asp-route-id="@Model.Id"
+                          asp-route-sectionId="@Context.Request.Query["SectionId"]"
+                          asp-route-brandId="@Context.Request.Query["BrandId"]">
+                        @Model.Name
+                    </a></p>
                     <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-default add-to-cart">
                         <i class="fa fa-shopping-cart"></i>Добавить в корзину
                     </a>

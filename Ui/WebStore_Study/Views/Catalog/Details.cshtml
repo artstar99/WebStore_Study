@@ -4,9 +4,10 @@
 }
 <section>
     <div class="container">
+        <vc:bread-crumbs/>
         <div class="row">
             <div class="col-sm-3">
-                <partial name="../Shared/Partial/_LeftSideBar" />
+                <partial name="../Shared/Partial/_LeftSideBar"/>
 
             </div>
 
@@ -15,7 +16,7 @@
                     <!--product-details-->
                     <div class="col-sm-5">
                         <div class="view-product">
-                            <img src="~/images/product-details/@Model.ImageUrl" alt="" />
+                            <img src="~/images/product-details/@Model.ImageUrl" alt=""/>
                             <h3>ZOOM</h3>
                         </div>
                         <div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -53,14 +54,14 @@
                     <div class="col-sm-7">
                         <div class="product-information">
                             <!--/product-information-->
-                            <img src="~/images/product-details/new.jpg" class="newarrival" alt="" />
+                            <img src="~/images/product-details/new.jpg" class="newarrival" alt=""/>
                             <h2>@Model.Name</h2>
                             <p>Web ID: @Model.Id.ToString("000000")</p>
-                            <img src="~/images/product-details/rating.png" alt="" />
+                            <img src="~/images/product-details/rating.png" alt=""/>
                             <span>
                                 <span>US @Model.Price.ToString("C")</span>
                                 <label>Кол-во:</label>
-                                <input type="text" value="3" />
+                                <input type="text" value="3"/>
                                 <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-default cart">
                                     <i class="fa fa-shopping-cart"></i>
                                     В корзину
@@ -69,15 +70,15 @@
                             <p><b>Доступность:</b> На складе</p>
                             <p><b>Состояние:</b> Новое</p>
                             <p><b>Бренд:</b> @Model.Brand.Name</p>
-                            <a href=""><img src="~/images/product-details/share.png" class="share img-responsive" alt="" /></a>
+                            <a href=""><img src="~/images/product-details/share.png" class="share img-responsive" alt=""/></a>
                         </div><!--/product-information-->
                     </div>
                 </div><!--/product-details-->
-                <partial name="Partial/_CategoryTab" />
+                <partial name="Partial/_CategoryTab"/>
 
 
 
-                <partial name="../Shared/Partial/_RecomendedItems" />
+                <partial name="../Shared/Partial/_RecomendedItems"/>
 
             </div>
         </div>
