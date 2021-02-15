@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Castle.Core.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using WebStore_Study.Controllers;
@@ -11,6 +12,7 @@ using WebStore_Study.Domain.Dto.Products;
 using WebStore_Study.Domain.ViewModels;
 using WebStore_Study.Interfaces.Services;
 using Xunit;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace WebStore_Study.Tests.Controllers
 {
@@ -39,7 +41,11 @@ namespace WebStore_Study.Tests.Controllers
                     new BrandDto(1, expectedBrandName, 1, 1),
                     new SectionDto(1, expectedSectionName, 1, null, 1)
                 ));
-            var controller = new CatalogController(productDataMock.Object);
+
+            var configurationMock = new Mock<IConfiguration>();
+            configurationMock.Setup(configuration => configuration[It.IsAny<string>()]).Returns("12");
+
+            var controller = new CatalogController(productDataMock.Object, configurationMock.Object);
             
             //act
 
@@ -84,7 +90,10 @@ namespace WebStore_Study.Tests.Controllers
                 .Setup(repo => repo.GetProducts(It.IsAny<ProductFilter>()))
                 .Returns(products);
 
-            var controller = new CatalogController(productDataMock.Object);
+            var configurationMock = new Mock<IConfiguration>();
+            configurationMock.Setup(configuration => configuration[It.IsAny<string>()]).Returns("12");
+
+            var controller = new CatalogController(productDataMock.Object, configurationMock.Object);
 
             var result = controller.Shop(expectedBrandId, expectedSectionId);
 
