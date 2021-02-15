@@ -13,7 +13,7 @@ namespace WebStore_Study.Components
         {
             this.productData = productData;
         }
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke( string BrandId)
         {
             return View(GetBrands());
         }
