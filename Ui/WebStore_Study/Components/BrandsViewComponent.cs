@@ -15,6 +15,7 @@ namespace WebStore_Study.Components
         }
         public IViewComponentResult Invoke( string BrandId)
         {
+            ViewBag.BrandId = int.TryParse(BrandId, out var id) ? id : (int?) null;
             return View(GetBrands());
         }
 
