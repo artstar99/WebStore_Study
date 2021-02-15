@@ -35,10 +35,18 @@ namespace WebStore_Study.Services.Tests.Products
 
             productDataMock = new Mock<IProductData>();
             productDataMock.Setup(c => c.GetProducts(It.IsAny<ProductFilter>()))
-                .Returns(new List<ProductDto>
+                .Returns(new PageProductsDto
                 {
-                    new (1, "Product1", 1, 1.1m, "asd", new BrandDto(1, "Brand1", 1, 1), new SectionDto(1, "Section1", 1, null, 1)),
-                    new (2, "Product2", 2, 2.2m, "fgh", new BrandDto(2, "Brand2", 2, 1), new SectionDto(2, "Section2", 2, null, 1))
+                    Products = new List<ProductDto>
+                    {
+                        new(1, "Product1", 1, 1.1m, "asd", new BrandDto(1, "Brand1", 1, 1),
+                            new SectionDto(1, "Section1", 1, null, 1)),
+                        new(2, "Product2", 2, 2.2m, "fgh", new BrandDto(2, "Brand2", 2, 1),
+                            new SectionDto(2, "Section2", 2, null, 1))
+                    },
+                    TotalCount = 2,
+
+
                 });
 
             cartStoreMock = new Mock<ICartStore>();

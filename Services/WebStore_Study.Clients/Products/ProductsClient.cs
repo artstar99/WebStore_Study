@@ -21,9 +21,9 @@ namespace WebStore_Study.Clients.Products
         public IEnumerable<BrandDto> GetBrands() => Get<IEnumerable<BrandDto>>($"{Address}/brands");
         public BrandDto GetBrandById(int id) => Get<BrandDto>($"{Address}/brands/{id}");
 
-        public IEnumerable<ProductDto> GetProducts(ProductFilter filter = null) =>
+        public PageProductsDto GetProducts(ProductFilter filter = null) =>
             Post(Address, filter ?? new ProductFilter())
-                .Content.ReadAsAsync<IEnumerable<ProductDto>>()
+                .Content.ReadAsAsync<PageProductsDto>()
                 .Result;
 
         public ProductDto GetProductById(int id) => Get<ProductDto>($"{Address}/{id}");

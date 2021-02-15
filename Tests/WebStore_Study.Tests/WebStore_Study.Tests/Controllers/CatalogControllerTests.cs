@@ -88,7 +88,7 @@ namespace WebStore_Study.Tests.Controllers
 
             productDataMock
                 .Setup(repo => repo.GetProducts(It.IsAny<ProductFilter>()))
-                .Returns(products);
+                .Returns(new PageProductsDto{Products = products, TotalCount = 3});
 
             var configurationMock = new Mock<IConfiguration>();
             configurationMock.Setup(configuration => configuration[It.IsAny<string>()]).Returns("12");

@@ -27,7 +27,7 @@ namespace WebStore_Study.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            var products = productData.GetProducts().FromDto();
+            var products = productData.GetProducts().Products.FromDto();
             return View(products);
         }
 
@@ -84,8 +84,14 @@ namespace WebStore_Study.Areas.Admin.Controllers
             product.Brand = productData.GetBrandById(model.Product.BrandId!.Value).FromDto();
             product.Section = productData.GetSectionById(model.Product.SectionId).FromDto();
 
-            product.Brand.Products = productData.GetProducts(new ProductFilter() {BrandId = product.BrandId}).FromDto().ToList();
-            product.Section.Products = productData.GetProducts(new ProductFilter() {SectionId = product.SectionId})
+            product.Brand.Products = productData
+                .GetProducts(new ProductFilter() {BrandId = product.BrandId})
+                .Products
+                .FromDto()
+                .ToList();
+            product.Section.Products = productData
+                .GetProducts(new ProductFilter() {SectionId = product.SectionId})
+                .Products
                 .FromDto().ToList();
             
             
@@ -167,11 +173,11 @@ namespace WebStore_Study.Areas.Admin.Controllers
             var section = productData.GetSectionById(model.Product.SectionId);
             model.Product.Brand = brand.FromDto();
             model.Product.Section = section.FromDto();
-            model.Product.Brand.Products = productData.GetProducts()
+            model.Product.Brand.Products = productData.GetProducts().Products
                     .FromDto()
                     .Where(x => x.BrandId == brand.Id)
                     .ToList();
-            model.Product.Section.Products = productData.GetProducts()
+            model.Product.Section.Products = productData.GetProducts().Products
                     .FromDto()
                     .Where(prod => prod.SectionId == section.Id)
                     .ToList();
