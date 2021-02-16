@@ -52,7 +52,7 @@ namespace WebStore_Study.ServiceHosting.Controllers
         /// </summary>
         /// <param name="filter">Фильтр по секции/бренду/id-шникам</param>
         [HttpPost]
-        public IEnumerable<ProductDto> GetProducts([FromBody] ProductFilter filter = null) => productData.GetProducts(filter);
+        public PageProductsDto GetProducts([FromBody] ProductFilter filter = null) => productData.GetProducts(filter);
 
         /// <summary>
         /// Получение товара по id

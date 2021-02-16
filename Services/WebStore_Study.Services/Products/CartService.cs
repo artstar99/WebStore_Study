@@ -80,7 +80,7 @@ namespace WebStore_Study.Services.Products
             {
                 Ids = cartStore.Cart.Items.Select(item => item.ProductId).ToArray()
             });
-            var productViewModels = products.FromDto().ToView().ToDictionary(p => p.Id);
+            var productViewModels = products.Products.FromDto().ToView().ToDictionary(p => p.Id);
             return new CartViewModel
             {
                 Items = cartStore.Cart.Items.Select(item => (productViewModels[item.ProductId], item.Quantity))

@@ -27,7 +27,7 @@ namespace WebStore_Study.Controllers.Api
                 nodes.Add(new SitemapNode(Url.Action("Shop", "Catalog", new{brand.Id})));
             }
 
-            foreach (var product in productData.GetProducts())
+            foreach (var product in productData.GetProducts().Products)
             {
                 nodes.Add(new SitemapNode(Url.Action("Shop", "Catalog", new { product.Id })));
             }

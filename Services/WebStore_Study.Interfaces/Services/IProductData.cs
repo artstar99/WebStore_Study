@@ -12,7 +12,7 @@ namespace WebStore_Study.Interfaces.Services
 
         SectionDto GetSectionById(int id);
         BrandDto GetBrandById(int id);
-        IEnumerable<ProductDto> GetProducts(ProductFilter filter=null);
+        PageProductsDto GetProducts(ProductFilter filter=null);
 
         ProductDto GetProductById(int id);
 
