@@ -13,14 +13,22 @@ namespace WebStore_Study.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-        private readonly ICartService cartService;
+       
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ICartService cartService)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.cartService = cartService;
         }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> IsEmailFree(string Email)
+        {
+            var adress = await userManager.FindByEmailAsync(Email);
+            
+            return Json(adress is null ? "true" : "Такой адрес уже зарегистрирован");
+        }
+
 
         [AllowAnonymous]
         public IActionResult Login(string ReturnUrl)

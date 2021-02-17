@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebStore_Study.Domain.ViewModels
 { 
@@ -7,6 +8,7 @@ namespace WebStore_Study.Domain.ViewModels
         [Required(ErrorMessage = "Необходимо указать E-mail")]
         [EmailAddress(ErrorMessage ="Некорректный адрес")]
         [Display(Name ="Ваш E-mail")]
+        [Remote("IsEmailFree", "Account")]
         public string Email { get; set; }
         
         [Required]
