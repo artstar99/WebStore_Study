@@ -13,6 +13,7 @@ using WebStore_Study.Clients.Products;
 using WebStore_Study.Clients.Values;
 using WebStore_Study.DAL.Context;
 using WebStore_Study.Domain.Entities;
+using WebStore_Study.Hubs;
 using WebStore_Study.Interfaces.Services;
 using WebStore_Study.Interfaces.TestApi;
 using WebStore_Study.Logger;
@@ -51,7 +52,7 @@ namespace WebStore_Study
             .AddDefaultTokenProviders();
             #endregion
 
-            #region Áàçà äàííûõ
+            #region DataBase
             services.AddTransient<WebStore_StudyDbInitializer>();
             services.AddDbContext<WebStore_StudyDb>(opt => opt.UseSqlServer(configuration.GetConnectionString("Default")));
             #endregion
@@ -86,7 +87,7 @@ namespace WebStore_Study
                 opt.SlidingExpiration = true;
             });
 
-
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -112,6 +113,9 @@ namespace WebStore_Study
 
             app.UseEndpoints(endpoints =>
             {
+
+                endpoints.MapHub<ChatHub>("/chat");
+
                 endpoints.MapControllerRoute(
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"

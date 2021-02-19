@@ -32,5 +32,7 @@ namespace WebStore_Study.Controllers
                 ServerTime = DateTime.Now,
             });
         }
+
+        public IActionResult SignalRTest() => View();
     }
 }

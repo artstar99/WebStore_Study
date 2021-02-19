@@ -1,0 +1,40 @@
+﻿
+
+@{
+    ViewBag.Title = "SignalR testing";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<div class="container">
+    <h4> Chat Example </h4>
+    <div id="inpit-form">
+        <input type="text" id="message"/>
+        <input type="button" class=" btn btn-default" id="send-message" value="Send"/>
+    </div>
+    <ul id="information-block">
+
+    </ul>
+</div>
+</body>
+</html>
+
+@section Scripts
+{
+    <script src="~/lib/SignalR/signalr.min.js"></script>
+    
+    <script>
+        const hubUrl = "/chat";
+        const connection = new signalR.HubConnectionBuilder().withUrl(hubUrl).build();
+        connection.on("MessageFromClient", data => $("#information-block").prepend($("<li></li>").html(data)));
+
+        $("#send-message").click(e => connection.invoke("SendMessage", $("#message").val()));
+        connection.start();
+
+    </script>
+}
