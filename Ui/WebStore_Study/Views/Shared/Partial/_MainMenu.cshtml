@@ -18,12 +18,19 @@
     <li><a taghelper-is-active-route asp-controller="Error404" asp-action="Index">404</a></li>
     <li><a taghelper-is-active-route asp-controller="ContactUs" asp-action="Index">Контакты</a></li>
     <li><a asp-controller="User" asp-action="Index" class="@IsActive("User")">Сотрудники</a></li>
-    <li><a taghelper-is-active-route asp-controller="TestWebApi" asp-action="Index">WebApi</a></li>
+    
+    <li class="dropdown">
+        <a taghelper-ignore-action taghelper-is-active-route href="#">Tests<i class="fa fa-angle-down"></i></a>
+        <ul role="menu" class="sub-menu">
+            <li><a taghelper-is-active-route asp-controller="TestWebApi" asp-action="Index">WebApi</a></li>
+            <li><a taghelper-is-active-route asp-controller="AjaxTest" asp-action="Index">Ajax test</a></li>
+        </ul>
+    </li>
 </ul>
 
 @functions
 {
-    string IsActive(string controller, string Action="Index") =>
+    string IsActive(string controller, string Action = "Index") =>
         Equals(controller, ViewContext.RouteData.Values["Controller"])
         && Equals(Action, ViewContext.RouteData.Values["Action"])
             ? "active"
